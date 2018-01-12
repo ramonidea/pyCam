@@ -120,7 +120,7 @@ void OpenNI2Driver::advertiseROSTopics()
   {
     image_transport::SubscriberStatusCallback itssc = boost::bind(&OpenNI2Driver::irConnectCb, this);
     ros::SubscriberStatusCallback rssc = boost::bind(&OpenNI2Driver::irConnectCb, this);
-// pub_ir_ = ir_it.advertiseCamera("image", 1, itssc, itssc, rssc, rssc);
+    pub_ir_ = ir_it.advertiseCamera("image", 1, itssc, itssc, rssc, rssc);
   }
 
   if (device_->hasDepthSensor())
@@ -150,7 +150,7 @@ void OpenNI2Driver::advertiseROSTopics()
 
   // Load the saved calibrations, if they exist
   color_info_manager_ = boost::make_shared<camera_info_manager::CameraInfoManager>(color_nh, color_name, color_info_url_);
-//  ir_info_manager_  = boost::make_shared<camera_info_manager::CameraInfoManager>(ir_nh,  ir_name,  ir_info_url_);
+  ir_info_manager_  = boost::make_shared<camera_info_manager::CameraInfoManager>(ir_nh,  ir_name,  ir_info_url_);
 
   get_serial_server = nh_.advertiseService("get_serial", &OpenNI2Driver::getSerialCb,this);
 
@@ -408,14 +408,14 @@ void OpenNI2Driver::colorConnectCb()
     device_->stopColorStream();
 
     // Start IR if it's been blocked on RGB subscribers
-  /*  bool need_ir = pub_ir_.getNumSubscribers() > 0;
+    bool need_ir = pub_ir_.getNumSubscribers() > 0;
     if (need_ir && !device_->isIRStreamStarted())
     {
       device_->setIRFrameCallback(boost::bind(&OpenNI2Driver::newIRFrameCallback, this, _1));
 
       ROS_INFO("Starting IR stream.");
       device_->startIRStream();
-    }*/
+    }
   }
 }
 
@@ -457,7 +457,7 @@ void OpenNI2Driver::irConnectCb()
   }
   boost::lock_guard<boost::mutex> lock(connect_mutex_);
 
-//  ir_subscribers_ = pub_ir_.getNumSubscribers() > 0;
+  ir_subscribers_ = pub_ir_.getNumSubscribers() > 0;
 
   if (ir_subscribers_ && !device_->isIRStreamStarted())
   {
@@ -492,7 +492,7 @@ void OpenNI2Driver::newIRFrameCallback(sensor_msgs::ImagePtr image)
       image->header.frame_id = ir_frame_id_;
       image->header.stamp = image->header.stamp + ir_time_offset_;
 
-    //  pub_ir_.publish(image, getIRCameraInfo(image->width, image->height, image->header.stamp));
+      pub_ir_.publish(image, getIRCameraInfo(image->width, image->height, image->header.stamp));
     }
   }
 }

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="941564c5-f98d-462f-8318-f98f6d126074" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/pyConn/publisher.py" afterPath="$PROJECT_DIR$/pyConn/publisher.py" />
-    </list>
+    <list default="true" id="941564c5-f98d-462f-8318-f98f6d126074" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +26,8 @@
       <file leaf-file-name="publisher.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pyConn/publisher.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state relative-caret-position="468">
+              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="e#22#66#0" expanded="true" />
               </folding>
@@ -72,7 +68,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="508" />
-    <option name="y" value="48" />
+    <option name="y" value="-1032" />
     <option name="width" value="1259" />
     <option name="height" value="1028" />
   </component>
@@ -149,7 +145,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="508" y="48" width="1259" height="1028" extended-state="0" />
+    <frame x="508" y="-1032" width="1259" height="1028" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -244,8 +240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pyConn/publisher.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state relative-caret-position="468">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="e#22#66#0" expanded="true" />
           </folding>
