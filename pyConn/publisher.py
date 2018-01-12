@@ -20,8 +20,8 @@ class RgbdPublisher:
     def publishFrame(self):
       #while True:
       while not rospy.is_shutdown():
-        self.device.getDepth()
-        data = self.device.converDepth2Gray()
+        data = self.device.getDepth()
+       # data = self.device.convertDepth2Gray()
         self.node.publish(data)
         #cv2.imshow("Depth",data)
         #cv2.waitKey(1)&255

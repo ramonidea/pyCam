@@ -52,7 +52,7 @@ class VisionSensor:
         self.dmap = np.fromstring(self.depth_stream.read_frame().get_buffer_as_uint16(), dtype=np.uint16).reshape(y, x)
         return self.dmap
 
-    def converDepth2Gray(self):
+    def convertDepth2Gray(self):
         self.d4d = np.uint8(self.dmap.astype(float) * 255 / 2 ** 12 - 1)  # Correct the range. Depth images are 12bits
         self.d4d = 255 - cv2.cvtColor(self.d4d, cv2.COLOR_GRAY2RGB)
         return self.d4d
