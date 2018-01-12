@@ -11,18 +11,23 @@ class RgbdPublisher:
     def __init__(self):
         self.device = VisionSensor()
         self.device.createDepth() # default 640*480*30fps
+        self.device.createColor() # default 640*480*30fps
         self.RosInit()
+        self.device.sync()
 
     def RosInit(self):
-        self.node = rospy.Publisher('CameraTest',Int16MultiArray, queue_size=30)
+      #  self.node = rospy.Publisher('Depth',Int16MultiArray, queue_size=30)
+        self.node_c = rospy.Publisher('Color', Int16MultiArray, queue_size=30)
         rospy.init_node("Joule", anonymous=False)
 
     def publishFrame(self):
       #while True:
       while not rospy.is_shutdown():
-        data = self.device.getDepth()
+       # data = self.device.getDepth()
+
        # data = self.device.convertDepth2Gray()
-        self.node.publish(data)
+        #self.node.publish(data)
+        self.node_c.publish(self.device.getRgbd())
         #cv2.imshow("Depth",data)
         #cv2.waitKey(1)&255
 
