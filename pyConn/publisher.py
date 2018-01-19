@@ -14,6 +14,7 @@ class RgbdPublisher:
         self.device = VisionSensor()
         self.device.createDepth() # default 640*480*30fps
         #self.device.createColor() # default 640*480*30fps
+        self.device.startDepth()
         self.RosInit() #init the cameras and ros node
         #self.device.sync()
 
@@ -26,20 +27,10 @@ class RgbdPublisher:
       #while True:
      #with open("/home/test/ws/src/pyRamon/pyConn/output.txt","wb") as f:
       while not rospy.is_shutdown():
-        self.device.getDepth()
-
-        data = self.device.convertDepth2Gray()
-        #print(len(data))
-        #f = StringIO()
-        #np.savez_compressed(f, x = data)
-        #f.seek(0)
-        #data = f.read()
-        #print(len(data))
 
 
-
-
-
+        data = self.device.getDepth2Int8
+        
         self.depth.publish(blosc.pack_array(data))
         #f.write(str(data))
 
