@@ -17,13 +17,15 @@ class visionsensor:
 
     #Start the Color Camera
     def startColor(self):
-        if self.rgb_stream is None:
+        if not self.rgb_stream is None:
             self.rgb_stream.start()
+            print("RGB camera start")
 
     #Start the Depth Camera
     def startDepth(self):
-        if self.depth_stream is None:
+        if not self.depth_stream is None:
             self.depth_stream.start()
+            print('Depth camera start')
 
     #Initialize color camera (default 640 * 480 * 30fps)
     def createColor(self,x=640,y=480,fps = 30):
@@ -32,6 +34,7 @@ class visionsensor:
             pixelFormat=c_api.OniPixelFormat.ONI_PIXEL_FORMAT_RGB888,resolutionX = x,
             resolutionY = y,fps = fps))
         self.rgb_stream.set_mirroring_enabled(False)
+        print("Intialize the Color Camera")
 
     #Initialize the Depth camera (default 640*480*30fps)
     def createDepth(self,x=640,y=480,fps=30):
@@ -41,6 +44,7 @@ class visionsensor:
                                resolutionY=y,
                                fps=fps))
         self.depth_stream.set_mirroring_enabled(False)
+        print("Initialize the Depth Camera")
 
 
     #Enable the depth and color sync (un after initalized both cameras, before running them)
@@ -50,9 +54,9 @@ class visionsensor:
         self.dev.set_image_registration_mode(openni2.IMAGE_REGISTRATION_DEPTH_TO_COLOR)
 
     #Return / Initalize self.rgb as the numpy array (uint8 3L 640 * 480 * 3 * uint8)
-    def getRgb(self,x = 640,y = 480,fps = 30):
+    def getRgb(self,x = 640,y = 480):
         #Returns numpy 3L ndarray to represent the rgb image.
-        self.bgr   = np.fromstring(self.rgb_stream.read_frame().get_buffer_as_uint8(),dtype=np.uint8).reshape(y,x,fps)
+        self.bgr   = np.fromstring(self.rgb_stream.read_frame().get_buffer_as_uint8(),dtype=np.uint8).reshape(y,x,3)
         self.rgb   = cv2.cvtColor(self.bgr,cv2.COLOR_BGR2RGB)
         return self.rgb
 

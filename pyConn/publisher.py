@@ -21,7 +21,7 @@ class RgbdPublisher:
 
 
     def RosInit(self):
-        self.depth = rospy.Publisher('Depth',String, queue_size=30)
+        #self.depth = rospy.Publisher('Depth',String, queue_size=30)
         self.rgbd = rospy.Publisher('RGBD', String, queue_size=30)
         rospy.init_node("Joule", anonymous=False)
 
@@ -30,15 +30,20 @@ class RgbdPublisher:
      #with open("/home/test/ws/src/pyRamon/pyConn/output.txt","wb") as f:
       while not rospy.is_shutdown():
 
-        data = self.device.getRgbd()
+        #data = self.device.getRgbd()
         #data = self.device.getDepth2Int8
 
-        self.depth.publish(blosc.pack_array(data))
+        #self.rgbd.publish(blosc.pack_array(data))
         #f.write(str(data))
+        rgb = self.device.getRgb().reshape(921600)
+        depth = self.device.getDepth2Int8()
+        data = np.append(rgb,depth)
 
+        self.rgbd.publish(blosc.pack_array(data))
+        #d4d = self.device.getDepth2Gray()
 
         #self.node_c.publish(self.device.getRgbd())
-        #cv2.imshow("Depth",data)
+        #cv2.imshow("depth || Color",np.hstack((rgb,d4d)))
         #cv2.waitKey(1)&255
 
 
