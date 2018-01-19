@@ -6,7 +6,7 @@ import numpy as np
 class visionsensor:
     def __init__(self):
         # Linux
-        self.dist = '/home/test/ws/src/pyRamon/pyConn/OpenNI-Linux-x64-2.2/Redist/'
+        self.dist = './ws/src/pyRamon/pyConn/OpenNI-Linux-x64-2.3/Redist/'
         openni2.initialize(self.dist)
         if (openni2.is_initialized()):
             print("openNI2 initialized")
@@ -17,12 +17,12 @@ class visionsensor:
 
     #Start the Color Camera
     def startColor(self):
-        if self.rgb_stream != null:
+        if self.rgb_stream is None:
             self.rgb_stream.start()
 
     #Start the Depth Camera
     def startDepth(self):
-        if self.depth_stream != null:
+        if self.depth_stream is None:
             self.depth_stream.start()
 
     #Initialize color camera (default 640 * 480 * 30fps)

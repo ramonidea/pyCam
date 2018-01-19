@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from openni2_device_init import VisionSensor
+from openni2_device_init import visionsensor
 import rospy
 from std_msgs.msg import String
 import time
@@ -11,7 +11,7 @@ import blosc
 
 class RgbdPublisher:
     def __init__(self):
-        self.device = VisionSensor()
+        self.device = visionsensor()
         self.device.createDepth() # default 640*480*30fps
         self.device.createColor() # default 640*480*30fps
         self.device.sync()
