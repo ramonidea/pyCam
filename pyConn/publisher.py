@@ -13,14 +13,16 @@ class RgbdPublisher:
     def __init__(self):
         self.device = VisionSensor()
         self.device.createDepth() # default 640*480*30fps
-        #self.device.createColor() # default 640*480*30fps
+        self.device.createColor() # default 640*480*30fps
+        self.device.sync()
         self.device.startDepth()
+        self.device.startColor()
         self.RosInit() #init the cameras and ros node
-        #self.device.sync()
+
 
     def RosInit(self):
         self.depth = rospy.Publisher('Depth',String, queue_size=30)
-        #self.node_c = rospy.Publisher('Color', Int16MultiArray, queue_size=30)
+        self.rgbd = rospy.Publisher('RGBD', String, queue_size=30)
         rospy.init_node("Joule", anonymous=False)
 
     def publishFrame(self):
@@ -28,8 +30,8 @@ class RgbdPublisher:
      #with open("/home/test/ws/src/pyRamon/pyConn/output.txt","wb") as f:
       while not rospy.is_shutdown():
 
-
-        data = self.device.getDepth2Int8
+        data = self.device.getRgbd()
+        #data = self.device.getDepth2Int8
 
         self.depth.publish(blosc.pack_array(data))
         #f.write(str(data))
