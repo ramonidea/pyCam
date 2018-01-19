@@ -30,7 +30,7 @@ class RgbdPublisher:
 
 
         data = self.device.getDepth2Int8
-        
+
         self.depth.publish(blosc.pack_array(data))
         #f.write(str(data))
 
