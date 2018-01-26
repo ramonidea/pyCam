@@ -7,17 +7,22 @@ import rospy
 import cv2
 import numpy as np
 import blosc
-import sys
-import pickle
+import scipy.ndimage
+import thread
+
+
+def keyboard_thread(list_a):
+    raw_input()
+    list_a.append(True)
 
 
 class RgbdPublisher:
     def __init__(self):
         self.device = visionsensor()
         self.device.createDepth() # default 640*480*30fps
-        self.device.createColor() # default 640*480*30fps
+        #self.device.createColor() # default 640*480*30fps
         self.device.sync()
-        self.device.startColor()
+        #self.device.startColor()
         self.device.startDepth()
 
         self.RosInit() #init the cameras and ros node
@@ -29,33 +34,46 @@ class RgbdPublisher:
         rospy.init_node("Joule", anonymous=False)
 
     def publishFrame(self):
-      #while True:
-     #self.temp = np.zeros((480*640*4),dtype=np.uint8)
-      while not rospy.is_shutdown():
+        #while True:
+        #self.temp = np.zeros((480*640*4),dtype=np.uint8)
+        list_a = []
+        thread.start_new_thread(keyboard_thread, (list_a,))
+        while not rospy.is_shutdown():
+            if not list_a:
+
+                #rgb = zoom(self.device.getRgb(), [0.5,0.5,1])
+                depth = scipy.ndimage.interpolation.zoom(self.device.getDepth2Int8(), [0.5,0.5])
+                #depth = self.device.getDepth2Int8()
+                #tarray = np.append(depth)
+                #print(rgb.shape)
+                print(depth.shape)
+
+                self.rgbd.publish(blosc.compress(depth.tostring()))
+
+                d4d = self.device.getDepth2Gray()
+
+                #self.node_c.publish(self.device.getRgbd())
+                cv2.imshow("depth",d4d)
+                cv2.waitKey(1)&255
+
+            else:
+                break
+        #self.device.rgb_stream.stop()
+        self.device.depth_stream.stop()
 
 
 
-        #data = self.device.getRgbd()
-        #data = self.device.getDepth2Int8
-
-        #self.rgbd.publish(blosc.pack_array(data))
-        #f.write(str(data))
 
 
-        #self.rgbd.publish(blosc.compress(tarray.tostring()))
+if __name__ == '__main__':
+    try:
+        rgbd = RgbdPublisher()
+        rgbd.publishFrame()
+    except rospy.ROSInterruptException:
+        print("ROS Interrupt")
 
-
-        #d4d = self.device.getDepth2Gray()
-
-        #self.node_c.publish(self.device.getRgbd())
-        #cv2.imshow("depth || Color",np.hstack((rgb,d4d)))
-        #cv2.waitKey(1)&255
-      self.device.rgb_stream.stop()
-      self.device.depth_stream.stop()
-
-
-      '''
-      Seperate to multiple topics
+'''
+Seperate to multiple topics
 rgb = self.device.getRgb()
 r,g,b = np.split(rgb,3, axis=2)
 r = np.squeeze(r)
@@ -68,12 +86,4 @@ self.g.publish(blosc.compress(g.tostring()))
 self.b.publish(blosc.compress(b.tostring()))
 self.d.publish(blosc.compress(d.tostring()))
 
-      '''
-
-
-if __name__ == '__main__':
-    try:
-        rgbd = RgbdPublisher()
-        rgbd.publishFrame()
-    except rospy.ROSInterruptException:
-        print("ROS Interrupt")
+'''
