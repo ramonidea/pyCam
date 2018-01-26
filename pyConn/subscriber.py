@@ -15,17 +15,13 @@ lasttime = 0
 def parseData(data):
     #print(len(data))
     data = blosc.decompress(data)
-    #data = np.split(data,[230400])
+    data = np.split(data,[230400])
 
     #data = np.fromstring(data, dtype = np.uint8).reshape(240,320)
-    #color = zoom(np.fromstring(data[0], dtype=np.uint8).reshape(240,320,3), [2,2,1])
+    color = zoom(np.fromstring(data[0], dtype=np.uint8).reshape(240,320,3), [2,2,1])
     depth = zoom(np.fromstring(data, dtype=np.uint8).reshape(240,320),[2,2])
 
     d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
-
-    #d4d = frame
-    #d4d = np.uint8(frame.astype(float) * 255 / 2 ** 12 - 1)
-    #return data
     return d4d
 
 
