@@ -14,15 +14,18 @@ lasttime = 0
 
 def parseData(data):
     #print(len(data))
-    data = blosc.decompress(data)
-    data = np.split(data,[230400])
+    data = blosc.unpack_array(data)
+    #print(data.shape)
+    data = np.dsplit(data,[3])
 
     #data = np.fromstring(data, dtype = np.uint8).reshape(240,320)
-    color = zoom(np.fromstring(data[0], dtype=np.uint8).reshape(240,320,3), [2,2,1])
-    depth = zoom(np.fromstring(data, dtype=np.uint8).reshape(240,320),[2,2])
+    #color = zoom(np.fromstring(data[0], dtype=np.uint8).reshape(240,320,3), [2,2,1])
+    #depth = zoom(np.fromstring(data[1], dtype=np.uint8).reshape(240,320),[2,2])
 
+    color = data[0]
+    depth = data[1].reshape(240,320)
     d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
-    return d4d
+    return np.hstack((color,d4d))
 
 
 def callback(data):
