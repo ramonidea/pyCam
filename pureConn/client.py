@@ -23,22 +23,27 @@ COLOR_PIXEL = 3  # RGB
 
 
 if __name__ == '__main__':
-    connection = socket.socket(socket.AF_INET, socket.TCP_NODELAY)
-    connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    connection.settimeout(TIMEOUT_SOCKET)
-    connection.connect((IP_SERVER, PORT_SERVER))
+    PORT = 5000  # default 5000 for both sides
+    s.bind(('', PORT))
+    s.listen(5)
+    BUFSIZE = 8192  # should be 2^n
+    s = socket(AF_INET, TCP_NODELAY)
+
     count = 0
     lasttime = int(round(time.time() * 1000))
 
     while True:
         try:
-            fileDescriptor = connection.makefile(mode='rb')
-            result = fileDescriptor.readline()
-            fileDescriptor.close()
-            result = base64.b64decode(result)
+            conn, (host, remoteport) = self.s.accept()
+            arr1 = b""
+            while True:
+                data = conn.recv(self.BUFSIZE)
+                if not data:
+                    break
+                arr1 += data
 
-            #data = blosc.unpack_array(result)
-            data = np.fromstring(result, dtype=np.uint8).reshape(480,640,4)
+            data = blosc.unpack_array(result)
+            #data = np.fromstring(result, dtype=np.uint8).reshape(480,640,4)
             data = np.dsplit(data,[3])
             color = data[0]
             depth = data[1].reshape(480,640)

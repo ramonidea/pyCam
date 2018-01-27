@@ -22,11 +22,11 @@ MAX_NUM_CONNECTIONS = 5
 
 class ConnectionPool(Thread):
 
-    def __init__(self, ip_, port_, conn_):
+    def __init__(self):
         Thread.__init__(self)
-        self.ip = ip_
-        self.port = port_
-        self.conn = conn_
+        self.BUFSIZE = 10000
+        self.hostAddr = "173.250.152.233"
+        self.PORT = 5000
         print "[+] New server socket thread started for " + self.ip + ":" + \
             str(self.port)
         self.device = visionsensor()
@@ -46,11 +46,17 @@ class ConnectionPool(Thread):
         tarray = np.dstack((rgb,depth))
         return tarray
 
+    def send(self,data):
+        self.s = socket(AF_INET,SOCK_STREAM)
+        self.s.connect((self.hostAddr, self.PORT))
+        self.s.sendto(data,(self.hostAddr,self.PORT))
+        self.s.close()
+
     def run(self):
         try:
             while True:
-                data = self.getData().tostring()
-                self.conn.sendall(base64.b64encode(data) + '\r\n')
+                data = blosc.pack_array(self.getData())
+                self.send(data)
         except Exception, e:
             print "Connection lost with " + self.ip + ":" + str(self.port) + \
                   "\r\n[Error] " + str(e.message)
@@ -59,14 +65,5 @@ class ConnectionPool(Thread):
 
 
 if __name__ == '__main__':
-
-
-    connection = socket.socket(socket.AF_INET, socket.TCP_NODELAY)
-    connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    connection.bind((SERVER_IP, SERVER_PORT))
-    connection.listen(MAX_NUM_CONNECTIONS)
-    while True:
-        (conn, (ip, port)) = connection.accept()
-        thread = ConnectionPool(ip, port, conn)
+        thread = ConnectionPool()
         thread.start()
-    connection.close()
