@@ -23,7 +23,7 @@ def parseData(data):
     #depth = zoom(np.fromstring(data[1], dtype=np.uint8).reshape(240,320),[2,2])
 
     color = data[0]
-    depth = data[1].reshape(240,320)
+    depth = data[1].reshape(480,640)
     d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
     return np.hstack((color,d4d))
 

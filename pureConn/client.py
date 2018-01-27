@@ -10,9 +10,10 @@ import socket
 import base64
 import numpy as np
 import blosc
+import time
 
 IP_SERVER = "69.91.157.166"
-PORT_SERVER = 953
+PORT_SERVER = 1080
 TIMEOUT_SOCKET = 10
 SIZE_PACKAGE = 4096
 
@@ -22,7 +23,7 @@ COLOR_PIXEL = 3  # RGB
 
 
 if __name__ == '__main__':
-    connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    connection = socket.socket(socket.AF_INET, socket.TCP_NODELAY)
     connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     connection.settimeout(TIMEOUT_SOCKET)
     connection.connect((IP_SERVER, PORT_SERVER))
@@ -36,10 +37,11 @@ if __name__ == '__main__':
             fileDescriptor.close()
             result = base64.b64decode(result)
 
-            data = blosc.unpack_array(result)
+            #data = blosc.unpack_array(result)
+            data = np.fromstring(result, dtype=np.uint8).reshape(480,640,4)
             data = np.dsplit(data,[3])
             color = data[0]
-            depth = data[1].reshape(240,320)
+            depth = data[1].reshape(480,640)
             d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
             cv2.imshow('Depth || Color', np.hstack((rgb,d4d)))
 
