@@ -20,9 +20,9 @@ class RgbdPublisher:
     def __init__(self):
         self.device = visionsensor()
         self.device.createDepth() # default 640*480*30fps
-        #self.device.createColor() # default 640*480*30fps
+        self.device.createColor() # default 640*480*30fps
         self.device.sync()
-        #self.device.startColor()
+        self.device.startColor()
         self.device.startDepth()
 
         self.RosInit() #init the cameras and ros node
@@ -42,23 +42,22 @@ class RgbdPublisher:
             if not list_a:
 
                 #rgb = zoom(self.device.getRgb(), [0.5,0.5,1])
-                depth = scipy.ndimage.interpolation.zoom(self.device.getDepth2Int8(), [0.5,0.5])
-                #depth = self.device.getDepth2Int8()
-                #tarray = np.append(depth)
-                #print(rgb.shape)
-                print(depth.shape)
+                #depth = scipy.ndimage.interpolation.zoom(self.device.getDepth2Int8(), [0.5,0.5])
+                rgb = self.device.getRgb()
+                depth = self.device.getDepth2Int8().reshape(480,640,1)
+                tarray = np.dstack((rgb,depth))
 
-                self.rgbd.publish(blosc.compress(depth.tostring()))
+                self.rgbd.publish(blosc.pack_array(tarray))
 
-                d4d = self.device.getDepth2Gray()
+                #d4d = self.device.getDepth2Gray()
 
                 #self.node_c.publish(self.device.getRgbd())
-                cv2.imshow("depth",d4d)
-                cv2.waitKey(1)&255
+                #cv2.imshow("depth",d4d)
+                #cv2.waitKey(1)&255
 
             else:
                 break
-        #self.device.rgb_stream.stop()
+        self.device.rgb_stream.stop()
         self.device.depth_stream.stop()
 
 

@@ -6,7 +6,7 @@ import numpy as np
 class visionsensor:
     def __init__(self):
         # Linux
-        self.dist = '/home/test/ws/src/pyRamon/pyConn/OpenNI-Linux-x64-2.3/Redist/'
+        self.dist = '/home/test/ws/src/pyRamon/pureConn/OpenNI-Linux-x64-2.3/Redist/'
         openni2.initialize(self.dist)
         if (openni2.is_initialized()):
             print("openNI2 initialized")

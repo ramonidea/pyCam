@@ -16,7 +16,7 @@ from threading import Thread
 
 
 SERVER_IP = "69.91.157.166"
-SERVER_PORT = 953
+SERVER_PORT = 1080
 MAX_NUM_CONNECTIONS = 5
 
 
@@ -49,7 +49,7 @@ class ConnectionPool(Thread):
     def run(self):
         try:
             while True:
-                data = blosc.pack_array(self.getData())
+                data = self.getData().tostring()
                 self.conn.sendall(base64.b64encode(data) + '\r\n')
         except Exception, e:
             print "Connection lost with " + self.ip + ":" + str(self.port) + \
@@ -61,12 +61,12 @@ class ConnectionPool(Thread):
 if __name__ == '__main__':
 
 
-    connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    connection = socket.socket(socket.AF_INET, socket.TCP_NODELAY)
     connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     connection.bind((SERVER_IP, SERVER_PORT))
     connection.listen(MAX_NUM_CONNECTIONS)
     while True:
         (conn, (ip, port)) = connection.accept()
-        thread = ConnectionPool(ip, port, conn, camera)
+        thread = ConnectionPool(ip, port, conn)
         thread.start()
     connection.close()
