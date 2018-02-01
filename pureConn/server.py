@@ -27,7 +27,7 @@ class ConnectionPool(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.BUFSIZE = 10000
-        self.hostAddr = "173.250.181.211"
+        self.hostAddr = "173.250.200.8"
         self.PORT = 3030
 
         self.device = visionsensor()
@@ -75,10 +75,6 @@ class ConnectionPool(Thread):
                 self.send(zlib.compress(data))
                 #with open("depth.jpg") as f:
                 #    depth = f.read()
-
-
-
-
 
                 '''
                 Intra-Frame Compression

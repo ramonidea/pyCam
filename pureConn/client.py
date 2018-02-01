@@ -15,15 +15,6 @@ import zlib
 from PIL import Image
 import StringIO
 
-IP_SERVER = "69.91.157.166"
-PORT_SERVER = 2005
-TIMEOUT_SOCKET = 10
-SIZE_PACKAGE = 4096
-
-IMAGE_HEIGHT = 480
-IMAGE_WIDTH = 640
-COLOR_PIXEL = 3  # RGB
-
 
 if __name__ == '__main__':
     PORT = 3030  # default 5000 for both sides
@@ -64,7 +55,7 @@ if __name__ == '__main__':
             depth = zlib.decompress(arr1)
             depth = np.fromstring(depth, dtype=np.uint8).reshape(480,640)
             d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
-            
+
             cv2.imshow('Color', np.hstack((rgb,d4d)))
             #data = np.fromstring(data, dtype=np.uint8).reshape(240,320,4)
             #data = np.dsplit(data,[3])
