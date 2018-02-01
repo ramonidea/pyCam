@@ -43,7 +43,7 @@ class ConnectionPool(Thread):
 
     def getData(self):
         rgb = self.device.getRgb()
-        depth = self.device.getDepth2Gray(self.device.getDepth2Int8())
+        depth = self.device.getDepth2Int8()
         #tarray = np.dstack((rgb,depth))
         return rgb, depth
 
@@ -62,16 +62,17 @@ class ConnectionPool(Thread):
                 #PIL same to JPEG and read the byte array
                 rgb, depth = self.getData()
                 img = Image.fromarray(rgb)
-                img1 = Image.fromarray(depth)
+                #img1 = Image.fromarray(depth)
                 fpath =BytesIO()
                 img.save(fpath, quality = 75, format = "JPEG")
                 #img.save("rgb.jpg",quality = 75)
                 fpath.seek(0)
                 self.send(fpath.getvalue())
-                dpath = BytesIO()
-                img1.save(dpath, quality = 75, format = "JPEG")
-                dpath.seek(0)
-                self.send(dpath.getvalue())
+                #dpath = BytesIO()
+                #img1.save(dpath, quality = 75, format = "JPEG")
+                #dpath.seek(0)
+                data = depth.tostring()
+                self.send(zlib.compress(data))
                 #with open("depth.jpg") as f:
                 #    depth = f.read()
 

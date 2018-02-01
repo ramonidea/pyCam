@@ -59,10 +59,13 @@ if __name__ == '__main__':
                 if not data:
                     break
                 arr1 += data
-            depth = Image.open(StringIO.StringIO(arr1))
-            depth = np.array(depth)
-            #print(rgb.shape)
-            cv2.imshow('Color', np.hstack((rgb,depth)))
+            #depth = Image.open(StringIO.StringIO(arr1))
+            #depth = np.array(depth)
+            depth = zlib.decompress(arr1)
+            depth = np.fromstring(depth, dtype=np.uint8).reshape(480,640)
+            d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
+            
+            cv2.imshow('Color', np.hstack((rgb,d4d)))
             #data = np.fromstring(data, dtype=np.uint8).reshape(240,320,4)
             #data = np.dsplit(data,[3])
             #rgb = data[0]
