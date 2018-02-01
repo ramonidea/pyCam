@@ -13,6 +13,7 @@ import base64
 import numpy as np
 import blosc
 from threading import Thread
+import cv2
 
 
 SERVER_IP = "69.91.157.166"
@@ -33,17 +34,17 @@ class ConnectionPool(Thread):
 
 
     def initDevice(self):
-        self.device.createColor(320,240)
-        self.device.createDepth(320,240)
+        self.device.createColor()
+        self.device.createDepth()
         self.device.sync()
         self.device.startColor()
         self.device.startDepth()
 
     def getData(self):
-        rgb = self.device.getRgb(240,320)
-        depth = self.device.getDepth2Int8(240,320)
-        tarray = np.dstack((rgb,depth))
-        return tarray
+        rgb = self.device.getRgb()
+        depth = self.device.getDepth2Gray(self.device.getDepth2Int8())
+        #tarray = np.dstack((rgb,depth))
+        return rgb, depth
 
     def send(self,data):
         self.s = socket(AF_INET,SOCK_STREAM)
@@ -55,11 +56,16 @@ class ConnectionPool(Thread):
 
     def run(self):
         try:
-            while True:
-                data = self.getData().tostring()
-                self.ndata = len(data)
-                data = blosc.compress(data,cname='zlib')
-                self.send(data)
+            n = 0
+            while n<3000:
+                n+=1
+                rgb,depth = self.getData()
+                #self.ndata = len(data)
+                #data = blosc.compress(data,cname='zlib')
+                #self.send(data)
+                cv2.imwrite("./pic/rgb_"+str(n)+".png",rgb)
+                cv2.imwrite("./pic/depth_"+str(n)+".png",depth)
+
         except Exception, e:
             print "[Error] " + str(e.message)
 

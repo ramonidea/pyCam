@@ -75,9 +75,9 @@ class visionsensor:
         return self.d4d
 
     #Return Depth2Gray image which can be show with cv2
-    def getDepth2Gray(self):
-        self.d4d = 255 - cv2.cvtColor(self.d4d, cv2.COLOR_GRAY2RGB)
-        return self.d4d
+    def getDepth2Gray(self, d4d):
+        d4d = 255 - cv2.cvtColor(d4d, cv2.COLOR_GRAY2RGB)
+        return d4d
 
     ##Need to check whether it may work
     def getRgbd(self, x = 640, y = 480):
