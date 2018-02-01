@@ -24,7 +24,7 @@ MAX_NUM_CONNECTIONS = 5
 class ConnectionPool(Thread):
 
     def __init__(self):
-        Thread.__init__(self)
+        #Thread.__init__(self)
         self.BUFSIZE = 10000
         self.hostAddr = "173.250.152.233"
         self.PORT = 5000
@@ -54,7 +54,7 @@ class ConnectionPool(Thread):
         print("Pre:"+str(self.ndata)+" After: "+str(self.adata)+" rate"+str(round(self.adata*1.0/self.ndata*100)))
         self.s.close()
 
-    def run(self):
+    def getImage(self):
         try:
             n = 0
             while n<3000:
@@ -63,6 +63,7 @@ class ConnectionPool(Thread):
                 #self.ndata = len(data)
                 #data = blosc.compress(data,cname='zlib')
                 #self.send(data)
+                print(n)
                 cv2.imwrite("./pic/rgb_"+str(n)+".png",rgb)
                 cv2.imwrite("./pic/depth_"+str(n)+".png",depth)
 
@@ -72,5 +73,7 @@ class ConnectionPool(Thread):
 
 
 if __name__ == '__main__':
-        thread = ConnectionPool()
-        thread.start()
+        #thread = ConnectionPool()
+        #thread.start()
+        a = ConnectionPool()
+        a.getImage()
