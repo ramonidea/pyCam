@@ -6,7 +6,7 @@ import numpy as np
 class visionsensor:
     def __init__(self):
         # Linux
-        self.dist = '/home/test/ws/src/pyRamon/pureConn/OpenNI-Linux-x64-2.3/Redist/'
+        self.dist = '/home/test/ws/src/pyRamon/pyConn/OpenNI-Linux-x64-2.3/Redist/'
         openni2.initialize(self.dist)
         if (openni2.is_initialized()):
             print("openNI2 initialized")
@@ -24,6 +24,16 @@ class visionsensor:
     def startDepth(self):
             self.depth_stream.start()
             print('Depth camera start')
+
+    #Stop the Depth Camera
+    def stopDepth(self):
+        self.device.depth_stream.stop()
+        print("Stop Depth Camera")
+
+    #Stop the Color Camera
+    def stopColor(self):
+        self.device.rgb_stream.stop()
+        print("Stop RGB Camera")
 
     #Initialize color camera (default 640 * 480 * 30fps)
     def createColor(self,x=640,y=480,fps = 30):
@@ -75,9 +85,9 @@ class visionsensor:
         return self.d4d
 
     #Return Depth2Gray image which can be show with cv2
-    def getDepth2Gray(self, d4d):
-        d4d = 255 - cv2.cvtColor(d4d, cv2.COLOR_GRAY2RGB)
-        return d4d
+    def getDepth2Gray(self):
+        self.d4d = 255 - cv2.cvtColor(self.d4d, cv2.COLOR_GRAY2RGB)
+        return self.d4d
 
     ##Need to check whether it may work
     def getRgbd(self, x = 640, y = 480):

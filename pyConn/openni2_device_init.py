@@ -25,6 +25,16 @@ class visionsensor:
             self.depth_stream.start()
             print('Depth camera start')
 
+    #Stop the Depth Camera
+    def stopDepth(self):
+        self.device.depth_stream.stop()
+        print("Stop Depth Camera")
+        
+    #Stop the Color Camera
+    def stopColor(self):
+        self.device.rgb_stream.stop()
+        print("Stop RGB Camera")
+
     #Initialize color camera (default 640 * 480 * 30fps)
     def createColor(self,x=640,y=480,fps = 30):
         self.rgb_stream = self.dev.create_color_stream()

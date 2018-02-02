@@ -7,11 +7,8 @@ Purpose: To test the transmission rate and latency vs runing on ROS
 '''
 from openni2_device_init import visionsensor
 import time
-import json
 from socket import *
-import base64
 import numpy as np
-import blosc
 import zlib
 from threading import Thread
 from PIL import Image
@@ -22,10 +19,9 @@ SERVER_PORT = 1080
 MAX_NUM_CONNECTIONS = 5
 
 
-class ConnectionPool(Thread):
+class ConnectionPool():
 
     def __init__(self):
-        Thread.__init__(self)
         self.BUFSIZE = 10000
         self.hostAddr = "173.250.200.8"
         self.PORT = 3030
@@ -40,6 +36,9 @@ class ConnectionPool(Thread):
         self.device.sync()
         self.device.startColor()
         self.device.startDepth()
+        print("Wait for the Camera to Start")
+        time.sleep(1)
+
 
     def getData(self):
         rgb = self.device.getRgb()
@@ -55,24 +54,27 @@ class ConnectionPool(Thread):
         #print("Pre:"+str(self.ndata)+" After: "+str(self.adata)+" rate"+str(round(self.adata*1.0/self.ndata*100)))
         self.s.close()
 
-    def run(self):
-        try:
-            while True:
+    def begin(self):
+        print("Press Ctr+C to stop the camera")
+        while True:
 
+            try:
                 #PIL same to JPEG and read the byte array
                 rgb, depth = self.getData()
                 img = Image.fromarray(rgb)
                 #img1 = Image.fromarray(depth)
-                fpath =BytesIO()
+                fpath = BytesIO()
                 img.save(fpath, quality = 75, format = "JPEG")
                 #img.save("rgb.jpg",quality = 75)
                 fpath.seek(0)
-                self.send(fpath.getvalue())
+                self.send(zlib.compress(fpath.getvalue()))
                 #dpath = BytesIO()
                 #img1.save(dpath, quality = 75, format = "JPEG")
                 #dpath.seek(0)
                 data = depth.tostring()
-                self.send(zlib.compress(data))
+                cdata = zlib.compress(data)
+                self.send(cdata)
+                #print("Compression Rate: ",len(cdata)*1.0 / len(data))
                 #with open("depth.jpg") as f:
                 #    depth = f.read()
 
@@ -83,11 +85,20 @@ class ConnectionPool(Thread):
                 data = blosc.compress(data)
                 self.send(data)
                 '''
-        except Exception, e:
-            print "[Error] " + str(e.message)
+            except Exception, e:
+                print "[Error] " + str(e.message)
+                if(e == KeyboardInterrupt):
+                    print("Camera Stop")
+                    self.device.rgb_stream.stop()
+                    self.device.depth_stream.stop()
+                    break
+                if(e==timeout):
+                    print("Connection Timeout. Will try in 2 Seconds")
+                    time.sleep(2)
+
 
 
 
 if __name__ == '__main__':
-        thread = ConnectionPool()
-        thread.start()
+        c = ConnectionPool()
+        c.begin()
