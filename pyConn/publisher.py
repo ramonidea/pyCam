@@ -6,9 +6,11 @@ import time
 import rospy
 import cv2
 import numpy as np
-import blosc
+import zlib
 import scipy.ndimage
 import thread
+from PIL import Image
+from io import BytesIO
 
 
 def keyboard_thread(list_a):
@@ -24,7 +26,7 @@ class RgbdPublisher:
         self.device.sync()
         self.device.startColor()
         self.device.startDepth()
-
+        time.sleep(1)
         self.RosInit() #init the cameras and ros node
 
 
@@ -33,6 +35,12 @@ class RgbdPublisher:
         self.rgbd = rospy.Publisher('RGBD', String, queue_size=30)
         rospy.init_node("Joule", anonymous=False)
 
+    def getData(self):
+        rgb = self.device.getRgb()
+        depth = self.device.getDepth2Int8()
+        #tarray = np.dstack((rgb,depth))
+        return rgb, depth
+
     def publishFrame(self):
         #while True:
         #self.temp = np.zeros((480*640*4),dtype=np.uint8)
@@ -40,25 +48,32 @@ class RgbdPublisher:
         thread.start_new_thread(keyboard_thread, (list_a,))
         while not rospy.is_shutdown():
             if not list_a:
+                if(self.rgbd.get_num_connections()> 0):
+                    rgb, depth = self.getData()
+                    img = Image.fromarray(rgb)
+                    #img1 = Image.fromarray(depth)
+                    fpath =BytesIO()
+                    img.save(fpath, quality = 75, format = "JPEG")
+                    #img.save("rgb.jpg",quality = 75)
+                    fpath.seek(0)
+                    self.rgbd.publish(fpath.getvalue())
+                    #dpath = BytesIO()
+                    #img1.save(dpath, quality = 75, format = "JPEG")
+                    #dpath.seek(0)
+                    data = depth.tostring()
 
-                #rgb = zoom(self.device.getRgb(), [0.5,0.5,1])
-                #depth = scipy.ndimage.interpolation.zoom(self.device.getDepth2Int8(), [0.5,0.5])
-                rgb = self.device.getRgb()
-                depth = self.device.getDepth2Int8().reshape(480,640,1)
-                tarray = np.dstack((rgb,depth))
+                    self.rgbd.publish(zlib.compress(data))
 
-                self.rgbd.publish(blosc.pack_array(tarray))
+                    #d4d = self.device.getDepth2Gray()
 
-                #d4d = self.device.getDepth2Gray()
-
-                #self.node_c.publish(self.device.getRgbd())
-                #cv2.imshow("depth",d4d)
-                #cv2.waitKey(1)&255
+                    #self.node_c.publish(self.device.getRgbd())
+                    #cv2.imshow("depth",d4d)
+                    #cv2.waitKey(1)&255
 
             else:
                 break
-        self.device.rgb_stream.stop()
-        self.device.depth_stream.stop()
+        self.device.stopDepth()
+        self.device.stopColor()
 
 
 

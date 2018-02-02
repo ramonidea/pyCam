@@ -29,7 +29,7 @@ class visionsensor:
     def stopDepth(self):
         self.device.depth_stream.stop()
         print("Stop Depth Camera")
-        
+
     #Stop the Color Camera
     def stopColor(self):
         self.device.rgb_stream.stop()

@@ -4,12 +4,15 @@ import cv2
 import numpy as np
 import rospy
 from std_msgs.msg import String
-import blosc
+import zlib
+from PIL import Image
 from scipy.ndimage.interpolation import zoom
 
 count = 0
 lasttime = 0
-
+f = True # True - rgb, False - Depth
+rgb = np.zeros((480*640*3),dtype=np.uint8)
+d4d = np.zeros((480*640*3),dtype=np.uint8)
 
 
 def parseData(data):
@@ -27,16 +30,32 @@ def parseData(data):
     d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
     return np.hstack((color,d4d))
 
+def parseDepth(data):
+    depth = zlib.decompress(data)
+    depth = np.fromstring(depth, dtype=np.uint8).reshape(480,640)
+    d4d = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
+    return d4d
+
+def parseRgb(data):
+    rgb = Image.open(StringIO.StringIO(zlib.decompress(data)))
+    rgb = np.array(rgb)
+    return rgb
 
 def callback(data):
-    # print(len(data.data))
+    global count, lasttime,f, rgb, d4d
 
-    global count, lasttime
-    #parseData(data.data)
+    if(f):
+        #RGB
+        f = !f
+        rgb = parseRgb(data.data)
+
+    else:
+        #Depth
+        f = !f
+        d4d = parseDepth(data.data)
+
     cv2.waitKey(1) & 255
-    cv2.imshow("RGBD", parseData(data.data))
-    #print(len(parseData(data.data)))
-
+    cv2.imshow("RGBD", np.hstack((rgb,d4d)))
     if (int(round(time.time() * 1000)) - lasttime > 5000):
         lasttime = int(round(time.time() * 1000))
         print("Average FPS:" + str(count / 5.0))

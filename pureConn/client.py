@@ -40,7 +40,7 @@ if __name__ == '__main__':
             #data = zlib.decompress(arr1)
 
             #data = np.fromstring(data, dtype=np.uint8).reshape(240,320,3)
-            rgb = Image.open(StringIO.StringIO(arr1))
+            rgb = Image.open(StringIO.StringIO(zlib.decompress(arr1)))
             rgb = np.array(rgb)
 
             conn, (host, remoteport) = s.accept()
@@ -67,9 +67,9 @@ if __name__ == '__main__':
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
-            if (int(round(time.time() * 1000)) - lasttime > 5000):
+            if (int(round(time.time() * 1000)) - lasttime > 10000):
                 lasttime = int(round(time.time() * 1000))
-                print("Average FPS:" + str(count / 5.0))
+                print("Average FPS:" + str(count / 10.0))
                 count = 0
             count += 1
 
