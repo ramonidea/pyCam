@@ -6,13 +6,14 @@ import rospy
 from std_msgs.msg import String
 import zlib
 from PIL import Image
-from scipy.ndimage.interpolation import zoom
+import StringIO
+
 
 count = 0
 lasttime = 0
 f = True # True - rgb, False - Depth
-rgb = np.zeros((480*640*3),dtype=np.uint8)
-d4d = np.zeros((480*640*3),dtype=np.uint8)
+rgb = np.zeros((480*640*3),dtype=np.uint8).reshape(480,640,3)
+d4d = np.zeros((480*640*3),dtype=np.uint8).reshape(480,640,3)
 
 
 def parseData(data):
@@ -38,7 +39,7 @@ def parseDepth(data):
 
 def parseRgb(data):
     rgb = Image.open(StringIO.StringIO(zlib.decompress(data)))
-    rgb = np.array(rgb)
+    rgb = np.array(rgb).reshape(480,640,3)
     return rgb
 
 def callback(data):
@@ -46,19 +47,18 @@ def callback(data):
 
     if(f):
         #RGB
-        f = !f
+        f = not f
         rgb = parseRgb(data.data)
 
     else:
         #Depth
-        f = !f
+        f = not f
         d4d = parseDepth(data.data)
-
     cv2.waitKey(1) & 255
     cv2.imshow("RGBD", np.hstack((rgb,d4d)))
-    if (int(round(time.time() * 1000)) - lasttime > 5000):
+    if (int(round(time.time() * 1000)) - lasttime > 10000):
         lasttime = int(round(time.time() * 1000))
-        print("Average FPS:" + str(count / 5.0))
+        print("Average FPS:" + str(count / 20.0))
         count = 0
     count += 1
 
