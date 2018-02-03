@@ -12,12 +12,6 @@ import thread
 from PIL import Image
 from io import BytesIO
 
-
-def keyboard_thread(list_a):
-    raw_input()
-    list_a.append(True)
-
-
 class RgbdPublisher:
     def __init__(self):
         self.device = visionsensor()
@@ -44,10 +38,9 @@ class RgbdPublisher:
     def publishFrame(self):
         #while True:
         #self.temp = np.zeros((480*640*4),dtype=np.uint8)
-        list_a = []
-        thread.start_new_thread(keyboard_thread, (list_a,))
         while not rospy.is_shutdown():
-            if not list_a:
+
+            try:
                 if(self.rgbd.get_num_connections()> 0):
                     rgb, depth = self.getData()
                     img = Image.fromarray(rgb)
@@ -56,7 +49,7 @@ class RgbdPublisher:
                     img.save(fpath, quality = 75, format = "JPEG")
                     #img.save("rgb.jpg",quality = 75)
                     fpath.seek(0)
-                    self.rgbd.publish(fpath.getvalue())
+                    self.rgbd.publish(zlib.compress(fpath.getvalue()))
                     #dpath = BytesIO()
                     #img1.save(dpath, quality = 75, format = "JPEG")
                     #dpath.seek(0)
@@ -69,9 +62,10 @@ class RgbdPublisher:
                     #self.node_c.publish(self.device.getRgbd())
                     #cv2.imshow("depth",d4d)
                     #cv2.waitKey(1)&255
+            except Exception,e:
+                if e == KeyboardInterrupt:
+                    break
 
-            else:
-                break
         self.device.stopDepth()
         self.device.stopColor()
 
