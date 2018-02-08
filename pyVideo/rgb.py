@@ -25,13 +25,15 @@ def index():
 def gen(camera):
     while True:
         frame = camera.get_frame()
-        yield (b'--frame\r\n'
+        yield (b'--frame'+str.encode(str(len(frame)))+b'e\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-@app.route('/video_feed')
-def video_feed():
-    return Response(gen(VideoCamera()),
+
+@app.route('/depth_feed')
+def rgb_feed():
+    return Response(gen(VideoCamera('depth')),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
 if __name__ == '__main__':
-    app.run(host='173.250.247.126', debug=True)
+    app.run(host='173.250.247.126', port='5050', debug=True)
