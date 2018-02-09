@@ -12,7 +12,6 @@ class VideoCamera(object):
         self.device = visionsensor()
         self.device.createColor() # default 640*480*30fps
         self.device.startColor()
-        self.device = visionsensor()
         self.device.createDepth()
         self.device.startDepth()
         time.sleep(1)

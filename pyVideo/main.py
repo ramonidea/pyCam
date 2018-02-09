@@ -38,4 +38,4 @@ def rgb_feed():
 
 
 if __name__ == '__main__':
-    app.run(host='173.250.247.126', port='5000', debug=True)
+    app.run(host='173.250.181.115', port=5000, debug=True)
