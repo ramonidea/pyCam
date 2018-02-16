@@ -8,7 +8,8 @@ import zlib
 
 
 class VideoCamera(object):
-    def __init__(self):
+    def __init__(self,x = 640, y = 480, fpd = 30, rgb_mirror = False,
+            depth_mirror = False, rgb = True, depth = True):
         self.device = visionsensor()
         self.device.createColor() # default 640*480*30fps
         self.device.startColor()
@@ -18,8 +19,7 @@ class VideoCamera(object):
 
 
     def __del__(self):
-        self.device.stopColor()
-        self.device.stopDepth()
+        self.device.stop()
 
     def get_frame(self):
         rgb = self.device.getRgb()
@@ -29,5 +29,5 @@ class VideoCamera(object):
         #fpath.seek(0)
         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 75]
         ret, jpeg = cv2.imencode('.jpg', rgb, encode_param)
-        depth = self.device.getDepth2Int8()
+        depth = self.device.getDepth()
         return jpeg.tobytes() , zlib.compress(depth)
