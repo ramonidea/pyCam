@@ -34,5 +34,5 @@ class VideoCamera(object):
             ret, jpeg = cv2.imencode('.jpg', rgb, encode_param)
             jpeg = jpeg.tobytes()
         if self.depth:
-            depth = zlib.compress(self.device.getDepth())
+            depth = zlib.compress(self.device.getDepth2Int8())
         return jpeg, depth

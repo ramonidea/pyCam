@@ -113,14 +113,13 @@ class visionsensor:
                 dtype=np.uint16).reshape(self.y, self.x)
         return dmap
 
-'''
-#Those two depth are optional and actually make the data lossy.
+
     # Return the depth as numpy array (1L uint8) (reshape the range of the value 0 - 255)
     def getDepth2Int8(self):
-        self.dmap = np.fromstring(self.depth_stream.read_frame().get_buffer_as_uint16(), dtype=np.uint16).reshape(y, x)
-        self.d4d = np.uint8(self.dmap.astype(float) * 255 / 2 ** 12 - 1)  # Correct the range. Depth images are 12bits
-        return self.d4d
-
+        dmap = np.fromstring(depth_stream.read_frame().get_buffer_as_uint16(), dtype=np.uint16).reshape(y, x)
+        d4d = np.uint8(dmap.astype(float) * 255 / 2 ** 12 - 1)  # Correct the range. Depth images are 12bits
+        return d4d
+'''
     #Return Depth2Gray image which can be show with cv2
     def getDepth2Gray(self):
         self.d4d = 255 - cv2.cvtColor(self.d4d, cv2.COLOR_GRAY2RGB)
