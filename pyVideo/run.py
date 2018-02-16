@@ -51,25 +51,26 @@ def rgb_feed():
 # To retrive the camera info before get the camera frames
 @app.route('camera_info')
 def camera_info():
-    return Response("-X"+str(videoX)+"-Y"+str(videoY)+"fps"+str(videoFps),
+    return Response("-X"+str(videoX)+"-Y"+str(videoY)+"-fps"+str(videoFps),
                         mimetype='text/xml')
 
 
-#Global Variables:
-app = Flask(__name__)
-videoX = 640
-videoY = 480
-videoFps = 30
-rgb = True
-depth = True
-ip = ""
-port = random.randint(4999,6000)
 
 if __name__ == '__main__':
 
+    #Global Variables:
+    app = Flask(__name__)
+    videoX = 640
+    videoY = 480
+    videoFps = 30
+    rgb = True
+    depth = True
+    ip = ""
+    port = random.randint(4999,6000)
+
     myargs = getopts(argv)
     try:
-        if "-ip" in myargs
+        if "-ip" in myargs:
             ip = myargs["-ip"]
         if "-port" in myargs:
             port = int(myargs["-port"])
