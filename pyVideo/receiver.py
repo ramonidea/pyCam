@@ -1,10 +1,14 @@
-from urllib.request import urlopen
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib2 import urlopen
 import numpy as np
 from PIL import Image
 from io import StringIO
 import cv2
 from io import BytesIO
-from matplotlib import pyplot as plt
+import time
+import zlib
 
 def getFrame(response):
     rgbData = b''
@@ -26,18 +30,17 @@ def getFrame(response):
     left = num - (4096-a-31)
     rgbData += response.read(left)
     depthData = response.read(int(depth))
-    return BytesIO(data), zlib.decompress(depthData)
+    return BytesIO(rgbData), zlib.decompress(depthData)
 
 
 if __name__ == '__main__':
-    rgb = urlopen("http://localhost:5000/video_feed")
+    video = urlopen("http://173.250.181.115:5000/video_feed")
     count = 0
     lasttime = 0
     lasttime = int(round(time.time() * 1000))
     while True:
-        try:
             rgb,depth = getFrame(video)
-            rgb = np.asarray(Image.open(rgb))
+            rgb = cv2.cvtColor(np.asarray(Image.open(rgb)), cv2.COLOR_RGB2BGR)
 
             depth = np.fromstring(depth,dtype=np.uint8).reshape(480,640)
             depth = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
@@ -46,8 +49,6 @@ if __name__ == '__main__':
             cv2.imshow("RGBD", np.hstack((rgb,depth)))
             if (int(round(time.time() * 1000)) - lasttime > 10000):
                 lasttime = int(round(time.time() * 1000))
-                print("Average FPS:" + str(count / 20.0))
+                print("Average FPS:" + str(count / 10.0))
                 count = 0
             count += 1
-        except Exception,e:
-            break
