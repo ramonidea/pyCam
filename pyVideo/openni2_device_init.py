@@ -1,3 +1,19 @@
+#!/usr/bin/env python
+
+# Depedency:
+# 1. Need to download Openni2 Driver for the OS. The one I am using is Openni driver for Linux X-64
+# 2. Need to install cv2 for camera frame capture and return numpy arrays
+#
+# This package is to control Openni2 Cameras, which supports turn on/off depth or rgb cameras
+# with different resolution adn fps settings; Getting frames from the camera
+#
+#Usage Example:
+# from openni2_device_init import visionsensor
+# self.device = visionsensor(x = x, y = y, fpd = fps, rgb_mirror = rgb_mirror,
+#                               depth_mirror = depth_mirror, rgb = rgb, depth = depth)
+#
+# TODO: add the compression option to return compressed frames
+
 import cv2
 from primesense import openni2  # , nite2
 from primesense import _openni2 as c_api
@@ -60,7 +76,7 @@ class visionsensor:
         self.rgb_stream.set_video_mode(c_api.OniVideoMode(
             pixelFormat=c_api.OniPixelFormat.ONI_PIXEL_FORMAT_RGB888,resolutionX = self.x,
             resolutionY = self.y,fps = self.fps))
-        self.rgb_stream.set_mirroring_enabled(rgb_mirror)
+        self.rgb_stream.set_mirroring_enabled(self.rgb_mirror)
         print("Intialize the Color Camera")
 
     #Initialize the Depth camera (default 640*480*30fps)
@@ -70,7 +86,7 @@ class visionsensor:
             c_api.OniVideoMode(pixelFormat=c_api.OniPixelFormat.ONI_PIXEL_FORMAT_DEPTH_1_MM, resolutionX=self.x,
                                resolutionY=self.y,
                                fps=selfself.fps))
-        self.depth_stream.set_mirroring_enabled(depth_mirror)
+        self.depth_stream.set_mirroring_enabled(self.depth_mirror)
         print("Initialize the Depth Camera")
 
 
@@ -97,6 +113,7 @@ class visionsensor:
         dmap = np.fromstring(self.depth_stream.read_frame().get_buffer_as_uint16(),
                 dtype=np.uint16).reshape(self.y, self.x)
         return dmap
+
 '''
 #Those two depth are optional and actually make the data lossy.
     # Return the depth as numpy array (1L uint8) (reshape the range of the value 0 - 255)
