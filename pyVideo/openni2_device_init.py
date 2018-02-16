@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import cv2
 from primesense import openni2  # , nite2
 from primesense import _openni2 as c_api
@@ -53,7 +54,6 @@ class visionsensor:
                                fps=fps))
         self.depth_stream.set_mirroring_enabled(False)
         print("Initialize the Depth Camera")
-
 
     #Enable the depth and color sync (un after initalized both cameras, before running them)
     def sync(self):
