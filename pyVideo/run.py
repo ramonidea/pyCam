@@ -37,6 +37,12 @@ def rgb_feed():
     return Response(gen(VideoCamera(x = videoX, y = videoY, fps = videoFps, rgb = rgb, depth = depth)),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
+@app.route('camera_info')
+def camera_info():
+    return Response("-X"+str(videoX)+"-Y"+str(videoY)+"fps"+str(videoFps))
+
+
 #Variables:
 app = Flask(__name__)
 
@@ -62,5 +68,3 @@ if __name__ == '__main__':
             depth = True if myargs["-depth"]=="t" else False
     except Exception, e:
         print(e.message)
-
-    

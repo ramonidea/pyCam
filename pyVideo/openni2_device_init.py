@@ -33,9 +33,6 @@ class visionsensor:
         if depth:
             self.startDepth()
 
-
-
-
     #Start the Color Camera
     def startColor(self):
         if self.rgb:
