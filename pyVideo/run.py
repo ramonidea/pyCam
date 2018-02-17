@@ -51,7 +51,7 @@ def rgb_feed():
 # To retrive the camera info before get the camera frames
 @app.route('camera_info')
 def camera_info():
-    return Response("-X"+str(videoX)+"-Y"+str(videoY)+"-fps"+str(videoFps),
+    return Response("-X"+str(videoX)+"-Y"+str(videoY),
                         mimetype='text/xml')
 
 

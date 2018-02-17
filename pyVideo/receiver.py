@@ -10,8 +10,9 @@ from io import BytesIO
 import time
 import zlib
 import rospy
-from sensor_msgs.msg import CompressedImage,CameraInfo
+from sensor_msgs.msg import CompressedImage,CameraInfo, Image
 from std_msgs.msg import String
+from cv_bridge import CvBridge, CvBridgeError
 
 #To parse the command line arguments
 def getopts(argv):
@@ -49,7 +50,6 @@ def retriveCameraInfo(ip, port):
     result = str(info.read(1024)).split('-')
     x = int(result[0][1:])
     y = int(result[1][1:])
-    fps = int(result[2][3:])
     return x,y,fps
 
 
@@ -81,15 +81,20 @@ if __name__ == '__main__':
         rgb_pub = rospy.Publisher("/Camera/rgb",CompressedImage,queue_size=30)
         print("/Camera/rgb is published, (CompressedImage)")
         depth_pub = rospy.Publisher("/Camera/depth",CompressedImage,queue_size=30)
-        print("/Camera/depth is published, (CompressedImage)")
+        print("/Camera/depth is published, (Image)")
         camera_info = rospy.Publisher("/Camera/camera_info",CameraInfo,queue_size=30)
         print("/Camera/camera_info is published, (camera_info)")
         rospy.init_node("Joule", anonymous=False)
          while not rospy.is_shutdown():
+            bridge = CvBridge()
             try:
                 if camera_info.get_num_connections() > 0:
                     videoX, videoY, videoFps = retriveCameraInfo(ip,port)
-
+                    info_msg = CameraInfo()
+                    info_msg.height = videoY
+                    info_msg.width = videoX
+                    #TODO: Need to add other parameters for the message
+                    camera_info.publish(info_msg)
 
                 if depth_pub.get_num_connections() > 0 or rgb_pub.get_num_connections() > 0:
                     video = urlopen("http://"+ip+":"+port+"/video_feed")
@@ -97,30 +102,25 @@ if __name__ == '__main__':
                         rgb,depth = getFrame(video)
                         rgb = cv2.cvtColor(np.asarray(Image.open(rgb)), cv2.COLOR_RGB2BGR)
 
-                        depth = np.fromstring(depth,dtype=np.uint16).reshape(480,640)
+                        rgb_msg = CompressedImage()
+                        rgb_msg.header.stamp = rospy.Time.now()
+                        rgb_msg.format = "jpeg"
+                        rgb_msg.data = rgb.tostring()
+                        # Publish new image
+                        rgb_pub.publish(rgb_msg)
+
+                        depth = np.fromstring(depth,dtype=np.uint8).reshape(480,640)
+                        depth = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
+                        try:
+                            depth_pub.publish(bridge.cv2_to_imgmsg(depth, "bgr8"))
+                        except CvBridgeError as e:
+                            print(e)
+
+
+
+
 
 
             except Exception,e:
                 if e == KeyboardInterrupt:
                     break
-
-
-
-
-    count = 0
-    lasttime = 0
-    lasttime = int(round(time.time() * 1000))
-    while True:
-            rgb,depth = getFrame(video)
-            rgb = cv2.cvtColor(np.asarray(Image.open(rgb)), cv2.COLOR_RGB2BGR)
-
-            depth = np.fromstring(depth,dtype=np.uint8).reshape(480,640)
-            depth = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
-
-            cv2.waitKey(1) & 255
-            cv2.imshow("RGBD", np.hstack((rgb,depth)))
-            if (int(round(time.time() * 1000)) - lasttime > 10000):
-                lasttime = int(round(time.time() * 1000))
-                print("Average FPS:" + str(count / 10.0))
-                count = 0
-            count += 1
