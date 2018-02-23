@@ -24,7 +24,19 @@ sudo apt-get update
 sudo apt-get install git python-pip python3-pip
 sudo apt-get -qq install -y libsm6 libxext6 && pip3 install -q -U opencv-python
 pip3 install -U numpy primesense pillow
+
 #The realsense lib wrapper is for python3
+#Need to follow the instruction here to set up the machine and install python wrapper
+# https://github.com/IntelRealSense/librealsense
+#
+#
+# git clone https://github.com/IntelRealSense/librealsense
+# cd librealsense
+# mkdir build
+# cd build
+# cmake ../ -DBUILD_PYTHON_BINDINGS=TRUE
+# make -j4
+# sudo make install #Optional if you want the library to be installed in your system
 
 ```
   
