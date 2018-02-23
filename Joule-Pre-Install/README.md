@@ -22,9 +22,9 @@ Has Wifi built-in
 ```
 sudo apt-get update
 sudo apt-get install git python-pip python3-pip
-sudo apt-get -qq install -y libsm6 libxext6 && pip install -q -U opencv-python
-pip install -U numpy primesense pillow
-
+sudo apt-get -qq install -y libsm6 libxext6 && pip3 install -q -U opencv-python
+pip3 install -U numpy primesense pillow
+#The realsense lib wrapper is for python3
 
 ```
   
