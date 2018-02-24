@@ -3,7 +3,7 @@ try:
 except ImportError:
     from urllib2 import urlopen
 import numpy as np
-from PIL import Image
+import PIL.Image
 from io import StringIO
 import cv2
 from io import BytesIO
@@ -13,6 +13,7 @@ import rospy
 from sensor_msgs.msg import CompressedImage,CameraInfo, Image
 from std_msgs.msg import String
 from cv_bridge import CvBridge, CvBridgeError
+from sys import argv
 
 #To parse the command line arguments
 def getopts(argv):
@@ -48,9 +49,10 @@ def getFrame(response):
 def retriveCameraInfo(ip, port):
     info = urlopen("http://"+ip+':'+port+'/camera_info')
     result = str(info.read(1024)).split('-')
-    x = int(result[0][1:])
-    y = int(result[1][1:])
-    print(result[2], result[3])
+    print(result)
+    x = int(result[1][1:])
+    y = int(result[2][1:])
+    print(result[3], result[4])
     return x,y
 
 
@@ -71,7 +73,7 @@ if __name__ == '__main__':
             ip = myargs["-ip"]
         if "-port" in myargs:
             port = myargs["-port"]
-    except Exception, e:
+    except Exception:
         print(e.message)
 
     if ip == "" or port == '':
@@ -86,44 +88,41 @@ if __name__ == '__main__':
         camera_info = rospy.Publisher("/Camera/camera_info",CameraInfo,queue_size=30)
         print("/Camera/camera_info is published, (camera_info)")
         rospy.init_node("Joule", anonymous=False)
-         while not rospy.is_shutdown():
+        while not rospy.is_shutdown():
             bridge = CvBridge()
-            try:
-                if camera_info.get_num_connections() > 0:
-                    videoX, videoY, videoFps = retriveCameraInfo(ip,port)
-                    info_msg = CameraInfo()
-                    info_msg.height = videoY
-                    info_msg.width = videoX
-                    #TODO: Need to add other parameters for the message
-                    camera_info.publish(info_msg)
+                #if camera_info.get_num_connections() > 0:
+            videoX, videoY = retriveCameraInfo(ip,port)
+            info_msg = CameraInfo()
+            info_msg.height = videoY
+            info_msg.width = videoX
+            print("Finish the camera Info")
+            #TODO: Need to add other parameters for the message
+            #camera_info.publish(info_msg)
 
-                if depth_pub.get_num_connections() > 0 or rgb_pub.get_num_connections() > 0:
-                    video = urlopen("http://"+ip+":"+port+"/video_feed")
-                    while depth_pub.get_num_connections() > 0 or rgb_pub.get_num_connections() > 0:
-                        rgb,depth = getFrame(video)
-                        rgb = cv2.cvtColor(np.asarray(Image.open(rgb)), cv2.COLOR_RGB2BGR)
+        #if depth_pub.get_num_connections() > 0 or rgb_pub.get_num_connections() > 0:
+            video = urlopen("http://"+ip+":"+port+"/video_feed")
+            while 1:#depth_pub.get_num_connections() > 0 or rgb_pub.get_num_connections() > 0:
+                rgb,depth = getFrame(video)
+                rgb = cv2.cvtColor(np.asarray(PIL.Image.open(rgb)), cv2.COLOR_RGB2BGR)
 
-                        rgb_msg = CompressedImage()
-                        rgb_msg.header.stamp = rospy.Time.now()
-                        rgb_msg.format = "jpeg"
-                        rgb_msg.data = rgb.tostring()
-                        # Publish new image
-                        #rgb_pub.publish(rgb_msg)
+                rgb_msg = CompressedImage()
+                rgb_msg.header.stamp = rospy.Time.now()
+                rgb_msg.format = "jpeg"
+                rgb_msg.data = rgb.tostring()
+                # Publish new image
+                #rgb_pub.publish(rgb_msg)
 
 
 
-                        depth = np.fromstring(depth,dtype=np.uint8).reshape(videoY,videoX)
-                        depth = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
-                        cv2.imshow('rgbd', np.hstack((rgb,depth)))
-                        if cv2.waitKey(1) & 0xFF == ord('q'):
-                            break
-'''
-
-                        try:
-                            depth_pub.publish(bridge.cv2_to_imgmsg(depth, "bgr8"))
-                        except CvBridgeError as e:
-                            print(e)
-'''
-            except Exception,e:
-                if e == KeyboardInterrupt:
+                depth = np.fromstring(depth,dtype=np.uint8).reshape(videoY,videoX)
+                depth = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
+                cv2.imshow('rgbd', np.hstack((rgb,depth)))
+                if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
+                '''
+
+                try:
+                    depth_pub.publish(bridge.cv2_to_imgmsg(depth, "bgr8"))
+                except CvBridgeError as e:
+                    print(e)
+                    '''
