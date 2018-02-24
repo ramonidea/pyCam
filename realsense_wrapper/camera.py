@@ -17,6 +17,9 @@ class VideoCamera(object):
 
         time.sleep(1)
 
+    def get_camera_info(self):
+        return self.device.get_camera_info()
+
 
     def __del__(self):
         self.device.stop()

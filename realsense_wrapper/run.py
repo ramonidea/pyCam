@@ -23,6 +23,12 @@ from camera import VideoCamera
 
 app = Flask(__name__)
 
+videoX = 640
+videoY = 360
+videoFps = 30
+ip = ""
+port = random.randint(4999,6000)
+
 intrinsics = ""
 extrinsics = ""
 
@@ -57,6 +63,7 @@ def rgb_feed():
 def get(camera):
     camera.start_camera()
     intrinsics, extrinsics = camera.get_camera_info()
+    print(intrinsics, extrinsics)
     return("-X"+str(videoX)+"-Y"+str(videoY)+"-in"+intrinsics+"-ex"+extrinsics)
 
 
@@ -71,11 +78,6 @@ def camera_info():
 
 #Global Variables:
 
-videoX = 640
-videoY = 360
-videoFps = 30
-ip = ""
-port = random.randint(4999,6000)
 
 myargs = getopts(argv)
 try:
