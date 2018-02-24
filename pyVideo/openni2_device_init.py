@@ -20,7 +20,7 @@ from primesense import _openni2 as c_api
 import numpy as np
 
 class visionsensor:
-    def __init__(self, x = 640, y = 480, fpd = 30, rgb_mirror = False,
+    def __init__(self, x = 640, y = 480, fps = 30, rgb_mirror = False,
             depth_mirror = False, rgb = True, depth = True):
         self.x = x
         self.y = y
