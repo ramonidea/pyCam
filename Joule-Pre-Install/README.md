@@ -17,6 +17,31 @@ Has Wifi built-in
 * Things about Intel Joule Board:
   - It has wifi and bluetooth module on board which may be convenient feature for wireless transmission. The wifi supports wifi-direct.
   - The type -C only for flash the BIOS. We need a USB hub for the USB port.(keyboard, mouse and maybe flash drive) The micro-USB can be connected to the host machine and use putty or other serial monitor to read the debug mode serial output. (The host machine needs to install driver)
+  
+  
+```
+sudo apt-get update
+sudo apt-get install git python-pip python3-pip
+sudo apt-get -qq install -y libsm6 libxext6 && pip3 install -q -U opencv-python
+pip3 install -U numpy primesense pillow
+
+#The realsense lib wrapper is for python3
+#Need to follow the instruction here to set up the machine and install python wrapper
+# https://github.com/IntelRealSense/librealsense
+#
+#
+# git clone https://github.com/IntelRealSense/librealsense
+# cd librealsense
+# mkdir build
+# cd build
+# cmake ../ -DBUILD_PYTHON_BINDINGS=TRUE
+# make -j4
+# sudo make install #Optional if you want the library to be installed in your system
+
+```
+  
+  
+  
 ```diff
 - The following installation of the ROS is actually not required for the final product, 
 - but I tested with ROS wireless transmission as well. (Only test purpose, not recommended to install)
