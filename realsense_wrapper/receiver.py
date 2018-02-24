@@ -50,6 +50,7 @@ def retriveCameraInfo(ip, port):
     result = str(info.read(1024)).split('-')
     x = int(result[0][1:])
     y = int(result[1][1:])
+    print(result[2], result[3])
     return x,y
 
 
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     ip = ''
     port = ''
     videoX = 640
-    videoY = 480
+    videoY = 360
     videoFps = 30
     rgb = True
     depth = True
@@ -107,20 +108,22 @@ if __name__ == '__main__':
                         rgb_msg.format = "jpeg"
                         rgb_msg.data = rgb.tostring()
                         # Publish new image
-                        rgb_pub.publish(rgb_msg)
+                        #rgb_pub.publish(rgb_msg)
 
-                        depth = np.fromstring(depth,dtype=np.uint8).reshape(480,640)
+
+
+                        depth = np.fromstring(depth,dtype=np.uint8).reshape(videoY,videoX)
                         depth = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
+                        cv2.imshow('rgbd', np.hstack((rgb,depth)))
+                        if cv2.waitKey(1) & 0xFF == ord('q'):
+                            break
+'''
+
                         try:
                             depth_pub.publish(bridge.cv2_to_imgmsg(depth, "bgr8"))
                         except CvBridgeError as e:
                             print(e)
-
-
-
-
-
-
+'''
             except Exception,e:
                 if e == KeyboardInterrupt:
                     break

@@ -9,7 +9,7 @@ import zlib
 
 
 class VideoCamera(object):
-    def __init__(self,x = 640, y = 480, fps= 30, rgb_mirror = False,
+    def __init__(self,x = 640, y = 480, fps = 30, rgb_mirror = False,
             depth_mirror = False, rgb = True, depth = True):
         self.device = visionsensor(x = x, y = y, fpd = fps, rgb_mirror = rgb_mirror,
                 depth_mirror = depth_mirror, rgb = rgb, depth = depth)
