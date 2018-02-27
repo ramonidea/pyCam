@@ -1,5 +1,4 @@
-#!/usr/bin/env python3.5
-
+#!/usr/bin/env python3
 # Depedency:
 # Need to follow the instruction here to set up the machine and install python wrapper
 # https://github.com/IntelRealSense/librealsense
@@ -39,6 +38,7 @@ class visionsensor:
 
     def load_settings(self):
         #low priority in implementing
+        #TODO: Enables the advanced mode
         pass
 
 
@@ -47,7 +47,6 @@ class visionsensor:
         extrinsics = self.pipeline.get_active_profile().get_streams()[0].get_extrinsics_to(self.pipeline.get_active_profile().get_streams()[1])
 
         return str(intrinsics), str(extrinsics)
-# TODO: Some processing data here to make to easy-to-be-separaable
 
 
     #Start the Color Camera
@@ -95,6 +94,7 @@ class visionsensor:
 
         #Return 1D Array
         depth_image = np.asarray(aligned_depth_frame.get_data())
+        #Convert the Depth image from uint16 to uint8
         depth_image = np.uint8(depth_image.astype(float) * 255 / 2 ** 12 - 1)
         #depth_image = 255 - cv2.cvtColor(depth_image, cv2.COLOR_GRAY2RGB)
 
