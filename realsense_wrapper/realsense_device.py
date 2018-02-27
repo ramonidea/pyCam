@@ -35,19 +35,15 @@ class visionsensor:
         #create a config
         self.config = rs.config()
 
-
     def load_settings(self):
         #low priority in implementing
         #TODO: Enables the advanced mode
         pass
 
-
     def get_camera_info(self):
         intrinsics = self.pipeline.get_active_profile().get_streams()[0].as_video_stream_profile().get_intrinsics()
         extrinsics = self.pipeline.get_active_profile().get_streams()[0].get_extrinsics_to(self.pipeline.get_active_profile().get_streams()[1])
-
         return str(intrinsics), str(extrinsics)
-
 
     #Start the Color Camera
     def startCamera(self):
@@ -59,14 +55,10 @@ class visionsensor:
     def stop(self):
         self.pipeline.stop()
 
-
-
     #Initialize color and depth camera (default 640 * 360 * 30fps)
     def createStreams(self):
         self.config.enable_stream(rs.stream.color, self.x, self.y, rs.format.bgr8, self.fps)
         self.config.enable_stream(rs.stream.depth, self.x, self.y, rs.format.z16, self.fps)
-
-
 
     #Enable the depth and color sync (un after initalized both cameras, before running them)
     def sync(self):
@@ -75,7 +67,6 @@ class visionsensor:
         # The "align_to" is the stream type to which we plan to align depth frames.
         self.align_to = rs.stream.color
         self.align = rs.align(self.align_to)
-
 
     #Return two frames from rgb and depth (aligned)
     def getFrame(self):

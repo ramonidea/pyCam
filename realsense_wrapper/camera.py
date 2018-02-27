@@ -14,7 +14,6 @@ class VideoCamera(object):
 
         self.device.createStreams()
 
-
         time.sleep(1)
 
     def get_camera_info(self):
