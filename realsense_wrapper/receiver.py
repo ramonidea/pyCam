@@ -10,8 +10,9 @@ from io import BytesIO
 import time
 import zlib
 import rospy
+import json
 from sensor_msgs.msg import CompressedImage,CameraInfo, Image
-from std_msgs.msg import String
+from std_msgs.msg import String, Header
 from cv_bridge import CvBridge, CvBridgeError
 from sys import argv
 
@@ -47,13 +48,27 @@ def getFrame(response):
     return BytesIO(rgbData), zlib.decompress(depthData)
 
 def retriveCameraInfo(ip, port):
+    global videoX,videoY,D,K,R,P
     info = urlopen("http://"+ip+':'+port+'/camera_info')
-    result = str(info.read(1024)).split('-')
-    print(result)
-    x = int(result[1][1:])
-    y = int(result[2][1:])
-    print(result[3], result[4])
-    return x,y
+    result = str(info.read(1024))
+    result = getopts(result)
+    videoX = int(result["-X"])
+    videoY = int(result["-Y"])
+    D = json.loads(result["-coeffs"])
+    K = [[int(result["-fx"]),0,int(result["-ppx"])],
+        [0,int(result["-fy"]),int(result["-ppy"])],
+        [0,0,1]]
+    R = json.loads(result["-rot"])
+
+    info_msg = CameraInfo()
+    info_msg.height = videoY
+    info_msg.width = videoX
+    info_msg.header.stamp = rospy.Time.now()
+    info_msg.D = D
+    info_msg.K = K
+    info_msg.R = R
+
+    return info_msg
 
 
 if __name__ == '__main__':
@@ -66,6 +81,12 @@ if __name__ == '__main__':
     videoFps = 30
     rgb = True
     depth = True
+    D = []
+    K = []
+    R = []
+    P = []
+
+
 
     myargs = getopts(argv)
     try:
@@ -83,7 +104,7 @@ if __name__ == '__main__':
         print("Init ROS")
         rgb_pub = rospy.Publisher("/Camera/rgb",CompressedImage,queue_size=30)
         print("/Camera/rgb is published, (CompressedImage)")
-        depth_pub = rospy.Publisher("/Camera/depth",CompressedImage,queue_size=30)
+        depth_pub = rospy.Publisher("/Camera/depth",Image,queue_size=30)
         print("/Camera/depth is published, (Image)")
         camera_info = rospy.Publisher("/Camera/camera_info",CameraInfo,queue_size=30)
         print("/Camera/camera_info is published, (camera_info)")
@@ -91,10 +112,8 @@ if __name__ == '__main__':
         while not rospy.is_shutdown():
             bridge = CvBridge()
                 #if camera_info.get_num_connections() > 0:
-            videoX, videoY = retriveCameraInfo(ip,port)
-            info_msg = CameraInfo()
-            info_msg.height = videoY
-            info_msg.width = videoX
+            info_msg = retriveCameraInfo(ip,port)
+
             print("Finish the camera Info")
             #TODO: Need to add other parameters for the message
             #camera_info.publish(info_msg)
@@ -113,9 +132,12 @@ if __name__ == '__main__':
                 #rgb_pub.publish(rgb_msg)
 
 
-
                 depth = np.fromstring(depth,dtype=np.uint8).reshape(videoY,videoX)
                 depth = 255 - cv2.cvtColor(depth, cv2.COLOR_GRAY2RGB)
+
+                dpt = bridge.cv2_to_imgmsg(depth, "bgr8")
+
+
                 cv2.imshow('rgbd', np.hstack((rgb,depth)))
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
