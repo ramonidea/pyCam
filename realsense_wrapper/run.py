@@ -20,9 +20,11 @@ import random
 from sys import argv
 from flask import Flask, render_template, Response
 from camera import VideoCamera
+import pyrealsense2 as rs
 
 app = Flask(__name__)
 
+#Default values
 videoX = 640
 videoY = 360
 videoFps = 30
@@ -63,21 +65,16 @@ def rgb_feed():
 def get(camera):
     camera.start_camera()
     intrinsics, extrinsics = camera.get_camera_info()
-    print(intrinsics, extrinsics)
-    return("-X"+str(videoX)+"-Y"+str(videoY)+"-in"+intrinsics+"-ex"+extrinsics)
 
-
+    return("-X"+str(videoX)+"-Y"+str(videoY)+"-ppx"+str(intrinsics.ppx)
+        +"-ppy"+str(intrinsics.ppy)+"-fx"+str(intrinsics.fx)+"-fy"+str(intrinsics.fy)
+        +"-coeffs"+str(intrinsics.coeffs)+"-rot"+str(extrinsics.rotation)+"-tra"+str(extrinsics.transition))
 
 # To retrive the camera info before get the camera frames
 @app.route('/camera_info')
 def camera_info():
     return Response(get(VideoCamera(x = videoX, y = videoY, fps = videoFps)),
                         mimetype='text/xml')
-
-
-
-#Global Variables:
-
 
 myargs = getopts(argv)
 try:
