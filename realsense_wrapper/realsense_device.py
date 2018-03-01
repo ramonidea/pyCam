@@ -17,6 +17,7 @@
 import pyrealsense2 as rs
 import numpy as np
 import cv2
+import time
 
 class visionsensor:
     def __init__(self, x = 640, y = 360, fps = 30):
@@ -43,13 +44,20 @@ class visionsensor:
     def get_camera_info(self):
         intrinsics = self.pipeline.get_active_profile().get_streams()[0].as_video_stream_profile().get_intrinsics()
         extrinsics = self.pipeline.get_active_profile().get_streams()[0].get_extrinsics_to(self.pipeline.get_active_profile().get_streams()[1])
-        return str(intrinsics), str(extrinsics)
+        return intrinsics, extrinsics
 
     #Start the Color Camera
     def startCamera(self):
         # Start streaming
-        self.profile = self.pipeline.start(self.config)
-        #self.depth = profile.get_device().first_depth_sensor()
+        try:
+            self.profile = self.pipeline.start(self.config)
+        except Exception as e:
+            print(e.message)
+            print("Wait for 2 seconds and try connect again ...")
+            if e != KeyboardInterrupt:
+                time.sleep(2)
+                self.startCamera()
+
 
     #Stop the Depth Camera
     def stop(self):
