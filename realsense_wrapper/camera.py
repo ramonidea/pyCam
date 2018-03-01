@@ -35,6 +35,5 @@ class VideoCamera(object):
         #fpath.seek(0)
         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), rgb_compress]
         ret, jpeg = cv2.imencode('.jpg', rgb, encode_param)
-        jpeg = jpeg.tobytes()
         depth = zlib.compress(depth)
-        return jpeg, depth
+        return jpeg.tobytes(), depth

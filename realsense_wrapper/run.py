@@ -21,6 +21,12 @@ from sys import argv
 from flask import Flask, render_template, Response
 from camera import VideoCamera
 import pyrealsense2 as rs
+import json
+import numpy as np
+
+import PIL.Image
+
+import cv2
 
 app = Flask(__name__)
 
@@ -46,6 +52,7 @@ def getopts(argv):
 #Host a normal website to show the instructions
 @app.route('/')
 def index():
+
     return render_template('index.html')
 
 #Continuous return camera frame
@@ -53,6 +60,7 @@ def gen(camera):
     camera.start_camera()
     while True:
         rgb,depth = camera.get_frame()
+
         yield (b'--frame'+str.encode(str(len(rgb)))+b'f'+str.encode(str(len(depth)))+b'e\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + rgb + depth + b'\r\n\r\n')
 
@@ -64,11 +72,21 @@ def rgb_feed():
 
 def get(camera):
     camera.start_camera()
-    intrinsics, extrinsics = camera.get_camera_info()
+    intrinsics_d, extrinsics_d, intrinsics_c, extrinsics_c = camera.get_camera_info()
+    result = {
+        "X":videoX,
+        "Y":videoY,
+        "ppx": intrinsics_d.ppx,
+        "ppy": intrinsics_d.ppy,
+        "fx":intrinsics_d.fx,
+        "fy":intrinsics_d.fy,
+        "coeffs":intrinsics_d.coeffs,
+        "rot":extrinsics_d.rotation,
+        "tra":extrinsics_d.translation
+    }
 
-    return("-X"+str(videoX)+"-Y"+str(videoY)+"-ppx"+str(intrinsics.ppx)
-        +"-ppy"+str(intrinsics.ppy)+"-fx"+str(intrinsics.fx)+"-fy"+str(intrinsics.fy)
-        +"-coeffs"+str(intrinsics.coeffs)+"-rot"+str(extrinsics.rotation)+"-tra"+str(extrinsics.transition))
+
+    return(json.dumps(result))
 
 # To retrive the camera info before get the camera frames
 @app.route('/camera_info')
@@ -92,8 +110,12 @@ except e:
     print(e.message)
 
 if ip == "":
-    print("Please Enter IP Address of the local machine")
+    print('\x1b[1;37;43m'+"Please Enter IP Address of the local machine" +"\x1b[0m")
 else:
-    print("Starting the Server on "+ip+':' +str(port))
+    print('\x1b[7;37;41m'+"Starting the Server on "+ip+':' +str(port)+"\x1b[0m")
+
+    print("Test the camera Connection")
+    print(get(VideoCamera(x = videoX, y = videoY, fps = videoFps)))
+
 
     app.run(host=ip, port=port, debug=False)
