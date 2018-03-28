@@ -70,7 +70,7 @@ class visionsensor:
 
     #Initialize color and depth camera (default 640 * 360 * 30fps)
     def createStreams(self):
-        self.config.enable_stream(rs.stream.color, self.x, self.y, rs.format.bgr8, self.fps)
+        self.config.enable_stream(rs.stream.color, self.x, 480, rs.format.bgr8, self.fps)
         self.config.enable_stream(rs.stream.depth, self.x, self.y, rs.format.z16, self.fps)
 
     #Enable the depth and color sync (un after initalized both cameras, before running them)
@@ -94,7 +94,7 @@ class visionsensor:
 
             # Get aligned frames
             aligned_depth_frame = aligned_frames.get_depth_frame() # aligned_depth_frame is a 640x480 depth image
-            color_frame = aligned_frames.get_color_frame()
+            color_frame = frames.get_color_frame()
 
         #Return 3d Array
         color_image = np.asarray(color_frame.get_data())

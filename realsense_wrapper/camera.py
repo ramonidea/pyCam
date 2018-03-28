@@ -8,6 +8,8 @@ import time
 import zlib
 
 
+
+
 class VideoCamera(object):
     def __init__(self,x = 640, y = 360, fps= 30):
         self.device = visionsensor(x = x, y = y, fps = fps)
@@ -27,7 +29,7 @@ class VideoCamera(object):
         self.device.startCamera()
         self.device.sync()
 
-    def get_frame(self, rgb_compress = 75):
+    def get_frame(self, rgb_compress = 50):
         rgb, depth = self.device.getFrame()
         #img = Image.fromarray(rgb)
         #fpath =BytesIO()

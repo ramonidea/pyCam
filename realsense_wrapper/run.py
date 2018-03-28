@@ -23,8 +23,9 @@ from camera import VideoCamera
 import pyrealsense2 as rs
 import json
 import numpy as np
-
+import zlib
 import PIL.Image
+
 
 import cv2
 
@@ -59,8 +60,9 @@ def index():
 def gen(camera):
     camera.start_camera()
     while True:
-        rgb,depth = camera.get_frame()
 
+        rgb,depth = camera.get_frame()
+        rgb = zlib.compress(rgb)
         yield (b'--frame'+str.encode(str(len(rgb)))+b'f'+str.encode(str(len(depth)))+b'e\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + rgb + depth + b'\r\n\r\n')
 
@@ -115,7 +117,7 @@ else:
     print('\x1b[7;37;41m'+"Starting the Server on "+ip+':' +str(port)+"\x1b[0m")
 
     print("Test the camera Connection")
-    print(get(VideoCamera(x = videoX, y = videoY, fps = videoFps)))
+    get(VideoCamera(x = videoX, y = videoY, fps = videoFps))
 
 
     app.run(host=ip, port=port, debug=False)
