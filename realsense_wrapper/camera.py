@@ -16,7 +16,7 @@ class VideoCamera(object):
 
         self.device.createStreams()
 
-        time.sleep(1)
+
 
     def get_camera_info(self):
         return self.device.get_camera_info()
@@ -28,6 +28,7 @@ class VideoCamera(object):
     def start_camera(self):
         self.device.startCamera()
         self.device.sync()
+        time.sleep(1)
 
     def get_frame(self, rgb_compress = 50):
         rgb, depth = self.device.getFrame()
@@ -38,4 +39,4 @@ class VideoCamera(object):
         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), rgb_compress]
         ret, jpeg = cv2.imencode('.jpg', rgb, encode_param)
         depth = zlib.compress(depth)
-        return jpeg.tobytes(), depth
+        return zlib.compress(jpeg.tobytes()), depth
