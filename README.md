@@ -1,4 +1,4 @@
-# pyRamon
+# pyCam
 general approach for wireless data transmission from robot end-effectors
 
 > Under development
