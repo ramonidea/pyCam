@@ -80,7 +80,7 @@ def callback(data):
     #cv2.waitKey(1) & 255
     #cv2.imshow("Color", ShowCompressedImage(data))
     #ShowCompressedImage(data)
-    ShowImage(data)
+    ShowCompressedImage(data)
     timestamp = data.header.stamp
     latency += time.time() - (timestamp.secs+round((timestamp.nsecs/ 1000000000.0),5))
 
@@ -94,9 +94,9 @@ def callback(data):
         count = 0
 
     if(len(fps) > 100):
-        with open("resultfps.json","wb") as outfile:
+        with open("./result(720)/comfps.json","wb") as outfile:
             json.dump(fps,outfile)
-        with open("resultlat.json","wb") as outfile:
+        with open("./result(720)/comlat.json","wb") as outfile:
             json.dump(lat, outfile)
         print("Save C to File")
         fps = []
@@ -109,7 +109,7 @@ def callback1(data):
     #cv2.waitKey(1) & 255
     #cv2.imshow("Depth", ShowCompressedDepth(data))
     #ShowCompressedDepth(data)
-    ShowDepth(data)
+    ShowCompressedDepth(data)
     timestamp = data.header.stamp
     latency1 += time.time() - (timestamp.secs+round((timestamp.nsecs/ 1000000000.0),5))
     if (int(round(time.time() * 1000)) - lasttime1 > 5000):
@@ -121,9 +121,9 @@ def callback1(data):
         latency1 = 0
         count1 = 0
     if(len(fps1) > 100 ):
-        with open("resultfps1.json","wb") as outfile:
+        with open("./result(720)/comfps1.json","wb") as outfile:
             json.dump(fps1,outfile)
-        with open("resultlat1.json","wb") as outfile:
+        with open("./result(720)/comlat1.json","wb") as outfile:
             json.dump(lat1, outfile)
         print("Save D to File")
         fps1 = []
@@ -141,8 +141,8 @@ def listener():
     rospy.init_node('listener', anonymous=False)
     lasttime = int(round(time.time() * 1000))
     lasttime1 = int(round(time.time() * 1000))
-    rospy.Subscriber("/camera/color/image_raw", Image, callback,  queue_size = 1)
-    rospy.Subscriber("/camera/depth/image_rect_raw", Image, callback1,  queue_size = 1)
+    rospy.Subscriber("/camera/color/image_raw/compressed", CompressedImage, callback,  queue_size = 1)
+    rospy.Subscriber("/camera/depth/image_rect_raw/compressed", CompressedImage, callback1,  queue_size = 1)
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
