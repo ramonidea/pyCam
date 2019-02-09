@@ -1,11 +1,404 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="941564c5-f98d-462f-8318-f98f6d126074" name="Default" comment="">
+    <list default="true" id="941564c5-f98d-462f-8318-f98f6d126074" name="Default" comment="Clean up the repo. And start work on new way to transmit camera feed">
+      <change afterPath="$PROJECT_DIR$/src/receiver.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/transmitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/pyRamon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyRamon.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CameraTest.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/camera_test.launch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Untitled.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/CHANGES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/OpenNILogo.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_conventions_8txt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_getting_started_8txt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_main_page_8txt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_n_o_t_i_c_e_8txt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_oni_enums_8h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_oni_enums_8h_source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_open_n_i_8h.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_open_n_i_8h_source.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/_release_notes_8txt_8txt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/annotated.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/bc_s.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/bdwn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_array-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_array.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_camera_settings-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_camera_settings.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_coordinate_converter-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_coordinate_converter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_device-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_device.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_device_info-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_device_info.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_device_info__inherit__graph.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_device_info__inherit__graph.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_device_info__inherit__graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i_1_1_device_connected_listener-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i_1_1_device_connected_listener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i_1_1_device_disconnected_listener-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i_1_1_device_disconnected_listener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i_1_1_device_state_changed_listener-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_open_n_i_1_1_device_state_changed_listener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_playback_control-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_playback_control.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_recorder-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_recorder.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_sensor_info-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_sensor_info.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_frame_ref-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_frame_ref.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_mode-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_mode.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_mode__inherit__graph.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_mode__inherit__graph.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_mode__inherit__graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_stream-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_stream.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_stream_1_1_frame_allocator-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_stream_1_1_frame_allocator.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_stream_1_1_new_frame_listener-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/classopenni_1_1_video_stream_1_1_new_frame_listener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/conventions_cpp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/dir_856524284ebe840938865dc061f982fb.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/doxygen.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/doxygen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/dynsections.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/files.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2blank.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2cl.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2doc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2folderclosed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2folderopen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2lastnode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2link.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2mlastnode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2mnode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2mo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2node.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2ns.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2plastnode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2pnode.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2splitbar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/ftv2vertline.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/functions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/functions_func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/functions_rela.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/functions_vars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/getting_started.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/graph_legend.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/graph_legend.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/graph_legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/hierarchy.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/index.hhc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/index.hhk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/index.hhp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_0.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_0.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_1.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_1.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_10.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_10.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_11.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_11.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_12.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_12.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_13.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_13.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_14.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_14.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_15.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_15.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_16.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_16.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_17.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_17.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_18.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_18.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_19.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_19.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_2.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_2.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_20.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_20.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_21.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_21.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_3.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_3.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_4.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_4.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_5.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_5.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_6.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_6.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_7.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_7.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_8.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_8.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_9.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_9.md5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherit_graph_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/inherits.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/legal.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/namespacemembers.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/namespacemembers_enum.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/namespacemembers_eval.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/namespacemembers_type.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/namespacemembers_vars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/namespaceopenni.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/namespaces.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/nav_f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/nav_g.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/nav_h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/pages.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/release_notes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_r_g_b888_pixel-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_r_g_b888_pixel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_version-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_version.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_y_u_v422_double_pixel-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_y_u_v422_double_pixel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_y_u_y_v_double_pixel-members.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/structopenni_1_1_y_u_y_v_double_pixel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/sync_off.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/sync_on.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/tab_a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/tab_b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/tab_h.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/tab_s.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/cpp/tabs.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/allclasses-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/allclasses-noframe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/constant-values.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/deprecated-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/index-all.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/CoordinateConverter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/CropArea.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/Device.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/DeviceInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/ImageRegistrationMode.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/OpenNI.DeviceConnectedListener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/OpenNI.DeviceDisconnectedListener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/OpenNI.DeviceStateChangedListener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/OpenNI.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/PixelFormat.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/PlaybackControl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/Point2D.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/Point3D.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/Recorder.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/SensorInfo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/SensorType.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/Version.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/VideoFrameRef.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/VideoMode.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/VideoStream.CameraSettings.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/VideoStream.NewFrameListener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/VideoStream.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/android/OpenNIHelper.DeviceOpenListener.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/android/OpenNIHelper.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/android/OpenNIView.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/android/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/android/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/android/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/org/openni/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/overview-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/overview-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/package-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Documentation/java/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/Android-Arm/OniPlatformAndroid-Arm.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/Driver/OniDriverAPI.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/Driver/OniDriverTypes.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/KinectProperties.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/Linux-Arm/OniPlatformLinux-Arm.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/Linux-x86/OniPlatformLinux-x86.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/MacOSX/OniPlatformMacOSX.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniCAPI.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniCEnums.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniCProperties.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniCTypes.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniEnums.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniPlatform.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniProperties.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniTest.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OniVersion.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/OpenNI.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/PS1080.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/PSLink.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/PrimeSense.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Include/Win32/OniPlatformWin32.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/NOTICE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI2/Drivers/OniFile.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI2/Drivers/PS1080.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI2/Drivers/PSLink.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI2/Drivers/libOniFile.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI2/Drivers/libPSLink.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI2/Drivers/liborbbec.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/OpenNI2/Drivers/orbbec.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/libMWClosestPoint.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/libOpenNI2.jni.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/libOpenNI2.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Redist/org.openni.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/ReleaseNotes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/ClosestPointViewer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/EventBasedRead" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/MWClosestPointApp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/MultiDepthViewer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/MultipleStreamRead" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI2/Drivers/OniFile.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI2/Drivers/PS1080.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI2/Drivers/PSLink.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI2/Drivers/libOniFile.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI2/Drivers/libPSLink.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI2/Drivers/liborbbec.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/OpenNI2/Drivers/orbbec.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/SimpleRead" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/SimpleViewer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/libMWClosestPoint.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/libOpenNI2.jni.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/libOpenNI2.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/org.openni.Samples.SimpleViewer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/org.openni.Samples.SimpleViewer.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/Bin/org.openni.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/OniSampleUtilities.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/Viewer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/Viewer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/ClosestPointViewer/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/OniSampleUtilities.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/EventBasedRead/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/MWClosestPoint.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/MWClosestPoint.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPoint/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/OniSampleUtilities.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MWClosestPointApp/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/OniSampleUtilities.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/Viewer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/Viewer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultiDepthViewer/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/OniSampleUtilities.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/MultipleStreamRead/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/OniSampleUtilities.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleRead/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/CommonJavaMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/src/org/openni/Samples/SimpleViewer/SimpleViewer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer.java/src/org/openni/Samples/SimpleViewer/SimpleViewerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/CommonCppMakefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/CommonDefs.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/CommonTargets.mak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/OniSampleUtilities.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/Platform.Arm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/Platform.x64" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/Platform.x86" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/Viewer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/Viewer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Samples/SimpleViewer/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/NiViewer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI2/Drivers/OniFile.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI2/Drivers/PS1080.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI2/Drivers/PSLink.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI2/Drivers/libOniFile.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI2/Drivers/libPSLink.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI2/Drivers/liborbbec.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/OpenNI2/Drivers/orbbec.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/PS1080Console" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/PSLinkConsole" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/libOpenNI2.jni.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/libOpenNI2.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/Tools/org.openni.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/install.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pureConn/OpenNI-Linux-x64-2.3/orbbec-usb.rules" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +424,45 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test/cam_view.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/transmitter.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pyVideo/camera.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1">
+              <folding>
+                <element signature="e#22#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/receiver.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,13 +478,14 @@
         <option value="$PROJECT_DIR$/pyConn/openni2_device_init.py" />
         <option value="$PROJECT_DIR$/pyConn/publisher.py" />
         <option value="$PROJECT_DIR$/pyConn/subscriber.py" />
+        <option value="$PROJECT_DIR$/src/transmitter.py" />
+        <option value="$PROJECT_DIR$/src/receiver.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
-    <option name="width" value="1343" />
-    <option name="height" value="824" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -68,6 +500,27 @@
               <item name="pyCam" type="b2602c69:ProjectViewProjectNode" />
               <item name="pyCam" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="pyCam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyCam" type="462c0819:PsiDirectoryNode" />
+              <item name="pyVideo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyCam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyCam" type="462c0819:PsiDirectoryNode" />
+              <item name="pyVideo" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyCam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyCam" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pyCam" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pyCam" type="462c0819:PsiDirectoryNode" />
+              <item name="Test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -75,8 +528,22 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="pyRamon" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="pyRamon" />
+      </console-settings>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -91,6 +558,28 @@
     </option>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="pyRamon" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="subscriber" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pyRamon" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,39 +618,50 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1515717072517</updated>
-      <workItem from="1549747509142" duration="295000" />
+      <workItem from="1549747509142" duration="734000" />
+      <workItem from="1549748763891" duration="1217000" />
     </task>
+    <task id="LOCAL-00001" summary="Clean up the repo. And start work on new way to transmit camera feed">
+      <created>1549747982250</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1549747982250</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="295000" />
+    <option name="totallyTimeSpent" value="1951000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="824" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22031474" />
-      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22317597" />
+      <window_info id="Structure" order="1" weight="0.24964234" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.329235" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.329235" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2899263" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="11" />
-      <window_info anchor="right" id="R Packages" />
-      <window_info anchor="right" id="R Graphics" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.12899263" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="right" id="Remote Host" weight="0.3297568" />
+      <window_info anchor="right" x="0" y="0" width="310" height="700" id="Documentation" side_tool="true" weight="0.3297568" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.3297568" />
       <window_info anchor="right" id="Database" order="4" weight="0.3297568" />
+      <window_info anchor="right" id="R Graphics" order="5" />
+      <window_info anchor="right" id="R Packages" order="6" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,11 +692,61 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Clean up the repo. And start work on new way to transmit camera feed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean up the repo. And start work on new way to transmit camera feed" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/stream_c++/image_transport_plugins/compressed_depth_image_transport/src/compressed_depth_publisher.cpp" />
     <entry file="file://$PROJECT_DIR$/pyConn/publisher.py" />
     <entry file="file://$PROJECT_DIR$/pyConn/openni2_device_init.py" />
     <entry file="file://$PROJECT_DIR$/pyConn/subscriber.py" />
+    <entry file="file://$PROJECT_DIR$/Test/Untitled.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#50#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/receiver.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test/cam_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transmitter.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyVideo/camera.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1">
+          <folding>
+            <element signature="e#22#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
