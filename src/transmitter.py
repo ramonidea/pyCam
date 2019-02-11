@@ -3,43 +3,46 @@ import time
 from multiprocessing import Pool
 from socket import *
 
+data_queue = DataQueue()
 
-def transmit_image(port,hostAddr, data_queue):
+def transmit_image(port,hostAddr):
+    global data_queue
     def prepare_data(_data, _count):
         return str(_count) + "f" + _data
     s = socket(AF_INET, SOCK_STREAM)
     while True:
-        count, data = data_queue.pop()
-        data = prepare_data(data, count)
-        try:
+        if len(data_queue)>0:
+            count, data = data_queue.pop()
             s.connect((hostAddr, port))
-        except error:
-            print("Please run the receiver function first before run the transmitter function.")
-            time.sleep(0.1)
-        s.sendto(data, (hostAddr, port))
-    s.close()
+            print((hostAddr, port))
+            data = prepare_data(data, count)
+            print(len(data))
+            s.sendto(data, (hostAddr, port))
+            data = s.recv(4)
+            print(data)
+            s.close()
 
 
-def get_frame(data_queue):
+def get_frame():
+    global data_queue
     count = 0
     while True:
-        data_queue.push(camera.get_compressed_frame(), count)
+        temp = camera.get_compressed_frame()
+        data_queue.push(temp[0], temp[2])
         count += 1
 
 
 if __name__ == "__main__":
-    data_queue = DataQueue()
+
     camera = VisionSensor(mock=True)
     camera.start_camera()
     camera.create_streams()
     camera.sync()
     while True:
-        camera_pool = Pool(processes=1)
-        camera_pool.apply(get_frame, data_queue)
-        camera_pool.close()
-
+        camera_pool = Process(target=get_frame)
+        camera_pool.start()
         p = Pool(processes=30)
-        ret = [p.apply_async(transmit_image, (6000 + x, '0.0.0.0', data_queue)) for x in range(10)]
+        ret = [p.apply_async(transmit_image, (20000 + x, '0.0.0.0')) for x in range(10)]
         p.close()
         camera_pool.join()
         p.join()

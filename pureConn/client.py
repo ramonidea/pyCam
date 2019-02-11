@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-'''
+""""
 The code will run on the receiver side
 will receive the data from the stream server
 Pure Python Socket program, without using ROS platform
-Purpose: To test the transmission rate and latency vs runing on ROS
-'''
+Purpose: To test the transmission rate and latency vs running on ROS
+"""
 import cv2
 from socket import *
 import base64
@@ -14,6 +14,7 @@ import time
 import zlib
 from PIL import Image
 import StringIO
+
 
 
 if __name__ == '__main__':

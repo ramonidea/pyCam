@@ -7,31 +7,45 @@ import time
 from PIL import Image
 from io import BytesIO
 import zlib
-from multiprocessing import Process, Value
+from multiprocessing import Process,Value
 import rospy
 from sensor_msgs.msg import CameraInfo
-import heapq
+from Queue import PriorityQueue
+from multiprocessing.managers import SyncManager
 
 
-class DataQueue:
+class MyManager(SyncManager):
+    pass
+
+
+MyManager.register("PriorityQueue", PriorityQueue)  # Register a shared PriorityQueue
+
+
+def Manager():
+    m = MyManager()
+    m.start()
+    return m
+
+class DataQueue():
     def __init__(self):
-        self.data = Value('data',[])
-        self.cur = Value("cur",0)
+        m = Manager()
+        self.data = m.PriorityQueue()
+        self.cur = Value("i", -1)
 
     def push(self, raw_data, key):
-        if key > self.cur:
-            with self.data.get_lock():
-                heapq.heappush(self.data.value, (key ,raw_data))
+        if key > self.cur.value:
+                self.data.put((key, raw_data))
 
     def __len__(self):
-        return len(self.data.value)
+        return self.data.qsize()
 
     def pop(self):
-        if self.__len__() > 0:
-            with self.data.get_lock():
-                temp = heapq.heappop(self.data.value)
+
+        if self.data.qsize() > 0:
+            print("ttttt")
+            temp = self.data.get()
             with self.cur.get_lock():
-                self.cur.value = temp[0]
+                self.cur.value = int(temp[0])
             return temp[0], temp[1]
 
 
@@ -47,6 +61,7 @@ def publish_camera_info(intrinsics_d, extrinsics_d, intrinsics_c, extrinsics_c, 
 
         pub.publish("hello world")
         r.sleep()
+
 
 class VisionSensor:
     def __init__(self, x=640, y=360, fps=30, quality = 75, mock = False):

@@ -2,13 +2,14 @@ from socket import *
 import cv2
 import numpy as np
 import time
-from multiprocessing import Pool
-
+from multiprocessing import Pool, Process
+from utils import *
 data = []
+data_queue = DataQueue()
 
 
-def display(data_queue):
-    global data
+def display():
+    global data,  data_queue
     while True:
         if len(data_queue) > 0:
             key, image = data_queue.pop()
@@ -16,32 +17,32 @@ def display(data_queue):
             print(key)
 
 
-
-
-def worker(remoteport, host, data_queue):
+def worker(remoteport, host):
+    global data_queue
+    BUFSIZE = 10000
+    s = socket(AF_INET, SOCK_STREAM)
     while True:
-        print(remoteport, host)
-        BUFSIZE = 300000
-        s = socket(AF_INET, SOCK_STREAM)
         s.bind((host, remoteport))
         s.listen(1)
         conn, addr = s.accept()
         arr1 = b""
         while True:
-            data = conn.recv(BUFSIZE)
-            if not data:
+            rawdata = conn.recv(BUFSIZE)
+            if not rawdata:
                 break
-            arr1 += data
+            arr1 += rawdata
+        s.sendto("DONE",addr)
+        print("PICTURE: "+ arr1[0:arr1.index(b'f')])
         data_queue.push(int(arr1[0:arr1.index(b'f')]), arr1[arr1.index(b'f')+1:])
+        s.close()
 
 if __name__ == '__main__':
-    data_queue = DataQueue()
-    while True:
-        show = Pool(processes=1)
-        show.close()
 
+    while True:
+        show = Process(target=display)
+        show.start()
         p = Pool(processes=30)
-        ret = [p.apply_async(worker, (6000 + x, "0.0.0.0",data_queue)) for x in range(10)]
+        ret = [p.apply_async(worker, (20000 + x, "0.0.0.0")) for x in range(10)]
         p.close()
         show.join()
         p.join()
