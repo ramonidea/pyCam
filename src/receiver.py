@@ -1,35 +1,56 @@
 from socket import *
 import cv2
-import numpy
+import numpy as np
+import time
 from multiprocessing import Pool
 
-def worker(remoteport, host, port):
-        print(remoteport)
+data = []
+
+
+def display(data_queue):
+    global data
+    while True:
+        if len(data_queue) > 0:
+            key, image = data_queue.pop()
+            data.append(image)
+            print(key)
+
+
+
+
+def worker(remoteport, host, data_queue):
+    while True:
+        print(remoteport, host)
         BUFSIZE = 300000
-        s = socket(AF_INET, TCP_NODELAY)
-        s.bind(('', port))
-        s.listen(5)
-        conn, (host, remoteport) = s.accept()
+        s = socket(AF_INET, SOCK_STREAM)
+        s.bind((host, remoteport))
+        s.listen(1)
+        conn, addr = s.accept()
         arr1 = b""
         while True:
             data = conn.recv(BUFSIZE)
             if not data:
                 break
             arr1 += data
-        return int(arr1[0:arr1.index(b'f')]), arr1[arr1.index(b'f')+1:]
+        data_queue.push(int(arr1[0:arr1.index(b'f')]), arr1[arr1.index(b'f')+1:])
 
 if __name__ == '__main__':
+    data_queue = DataQueue()
     while True:
-        p = Pool(processes=30)
-        ret = [p.apply_async(worker, (5000 + x, '192.168.177', 9000 + x)) for x in range(10)]
-        p.close()
-        p.join()
-        for i in ret:
-            print(ret[0])
+        show = Pool(processes=1)
+        show.close()
 
-            cv2.imshow('image',cv2.imdecode(np.frombuffer(ret[1], np.uint8), -1))
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+        p = Pool(processes=30)
+        ret = [p.apply_async(worker, (6000 + x, "0.0.0.0",data_queue)) for x in range(10)]
+        p.close()
+        show.join()
+        p.join()
+
+
+
+            #cv2.imshow('image',cv2.imdecode(np.frombuffer(result[1], np.uint8), -1))
+            #if cv2.waitKey(1) & 0xFF == ord('q'):
+            #    break
 
 
     cv2.destroyAllWindows()

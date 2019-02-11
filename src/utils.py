@@ -7,9 +7,33 @@ import time
 from PIL import Image
 from io import BytesIO
 import zlib
-from multiprocessing import Process
+from multiprocessing import Process, Value
 import rospy
 from sensor_msgs.msg import CameraInfo
+import heapq
+
+
+class DataQueue:
+    def __init__(self):
+        self.data = Value('data',[])
+        self.cur = Value("cur",0)
+
+    def push(self, raw_data, key):
+        if key > self.cur:
+            with self.data.get_lock():
+                heapq.heappush(self.data.value, (key ,raw_data))
+
+    def __len__(self):
+        return len(self.data.value)
+
+    def pop(self):
+        if self.__len__() > 0:
+            with self.data.get_lock():
+                temp = heapq.heappop(self.data.value)
+            with self.cur.get_lock():
+                self.cur.value = temp[0]
+            return temp[0], temp[1]
+
 
 def publish_camera_info(intrinsics_d, extrinsics_d, intrinsics_c, extrinsics_c, x, y):
     rospy.init_node('camera_info')
@@ -108,9 +132,11 @@ class VisionSensor:
     def get_frame(self):
         self.frame_count += 1
         if self.mock:
-            color = cv2.imread("1.jpg")
-            depth = color
-            return color, depth, self.frame_count
+            start = time.time()
+            color = cv2.imread("/home/nvidia/pyCam/src/1.jpg")
+            while time.time() - start < 1/30.0:
+                pass
+            return color, color, self.frame_count
 
         aligned_depth_frame = False
         color_frame = False
