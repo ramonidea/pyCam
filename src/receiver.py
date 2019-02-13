@@ -21,17 +21,23 @@ def worker(remoteport, host):
     global data_queue
     BUFSIZE = 10000
     s = socket(AF_INET, SOCK_STREAM)
+    s.bind((host, remoteport))
+    print((host, remoteport))
     while True:
-        s.bind((host, remoteport))
-        s.listen(1)
+        s.listen(5)
         conn, addr = s.accept()
+        print(addr)
         arr1 = b""
+        digit = int(conn.recv(8))
         while True:
-            rawdata = conn.recv(BUFSIZE)
-            if not rawdata:
+            if digit <= 0:
                 break
+            rawdata = conn.recv(BUFSIZE)
+            print(len(rawdata))
             arr1 += rawdata
-        s.sendto("DONE",addr)
+            digit -= len(rawdata)
+        print(222)
+        conn.sendall("DONE")
         print("PICTURE: "+ arr1[0:arr1.index(b'f')])
         data_queue.push(int(arr1[0:arr1.index(b'f')]), arr1[arr1.index(b'f')+1:])
         s.close()
@@ -42,7 +48,7 @@ if __name__ == '__main__':
         show = Process(target=display)
         show.start()
         p = Pool(processes=30)
-        ret = [p.apply_async(worker, (20000 + x, "0.0.0.0")) for x in range(10)]
+        ret = [p.apply_async(worker, (50000 + x, "0.0.0.0")) for x in range(10)]
         p.close()
         show.join()
         p.join()

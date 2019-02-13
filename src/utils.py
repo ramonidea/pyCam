@@ -26,7 +26,8 @@ def Manager():
     m.start()
     return m
 
-class DataQueue():
+
+class DataQueue:
     def __init__(self):
         m = Manager()
         self.data = m.PriorityQueue()
@@ -45,7 +46,7 @@ class DataQueue():
             print("ttttt")
             temp = self.data.get()
             with self.cur.get_lock():
-                self.cur.value = int(temp[0])
+                self.cur.value = temp[0]
             return temp[0], temp[1]
 
 

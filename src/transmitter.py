@@ -5,20 +5,25 @@ from socket import *
 
 data_queue = DataQueue()
 
-def transmit_image(port,hostAddr):
+def transmit_image(port,hostAddr,cur_port):
     global data_queue
     def prepare_data(_data, _count):
-        return str(_count) + "f" + _data
+        data  = format(len(_data), '08d')
+        data += str(_count) + "f" + _data
+        return data
+
+    print((hostAddr, port))
     s = socket(AF_INET, SOCK_STREAM)
     while True:
         if len(data_queue)>0:
             count, data = data_queue.pop()
             s.connect((hostAddr, port))
-            print((hostAddr, port))
+
             data = prepare_data(data, count)
             print(len(data))
-            s.sendto(data, (hostAddr, port))
-            data = s.recv(4)
+            s.sendall(data)
+            print(11)
+            data = s.recv(100)
             print(data)
             s.close()
 
@@ -42,7 +47,7 @@ if __name__ == "__main__":
         camera_pool = Process(target=get_frame)
         camera_pool.start()
         p = Pool(processes=30)
-        ret = [p.apply_async(transmit_image, (20000 + x, '0.0.0.0')) for x in range(10)]
+        ret = [p.apply_async(transmit_image, (50000 + x, '0.0.0.0', 10000 + x)) for x in range(10)]
         p.close()
         camera_pool.join()
         p.join()
